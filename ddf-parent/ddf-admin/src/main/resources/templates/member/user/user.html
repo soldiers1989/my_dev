@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="member:user:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="member:user:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<input id="id" placeholder="用户ID" type="text" class="form-control" >
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<input id="userName" placeholder="用户名" type="text" class="form-control" >
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<input id="mobile" placeholder="手机号码" type="text" class="form-control" >
+						</div>
+						
+						<div class="columns pull-right col-md-2 nopadding">
+							<input  id="endCreateDate"  placeholder="注册结束日期"  type="text" class="form-control laydate-icon " 
+										   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+                                           
+						</div>
+						
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="startCreateDate" placeholder="注册开始日期"  type="text" class=" form-control laydate-icon" 
+								           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="status" data-placeholder="用户状态" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择用户状态</option>
+								<option th:each="status:${UserStatus}" th:text="${status.explain}" th:value="${status}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="businessType" data-placeholder="业务类型" class="form-control chosen-select" tabindex="2" style="width: 100%">
+								<option value="">选择业务类型</option>
+								<option th:each="status:${RealNameType}" th:text="${status.explain}" th:value="${status}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="realNameFlag" data-placeholder="实名认证" class="form-control chosen-select" tabindex="2" style="width: 100%">
+								<option value="">选择实名认证</option>
+								<option th:each="status:${RealNameStatus}" th:text="${status.explain}" th:value="${status}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="bondFlag" data-placeholder="真房东计划" class="form-control chosen-select" tabindex="2" style="width: 100%">
+								<option value="">选择真房东计划</option>
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="answerFlag" data-placeholder="电话免打扰" class="form-control chosen-select" tabindex="2" style="width: 100%" id="answerFlag">
+								<option value="">选择电话免打扰</option>
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+						</div>
+						
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="member:user:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="member:user:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="member:user:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/member/user/user.js"></script>
+</body>
+</html>

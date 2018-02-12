@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<input type="hidden" th:value="${withdrawApplyBatch.id}" id="id">
+							<input type="hidden" th:value="${withdrawApplyBatch.alipayBatchNo}" id="alipayBatchNo">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">批次名称：</label>
+								<div class="col-sm-8">
+									<input id="batchName" th:value="${withdrawApplyBatch.batchName}" name="batchName" class="form-control" type="text" readonly="readonly">
+								</div>
+							</div>
+							<table id="queryTable" data-mobile-responsive="true">
+							</table>
+							<div class="form-group" th:if="${withdrawApplyBatch.status.name() eq 'WAIT'}">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="onclick" class="btn btn-primary" onclick="transfer()">转账</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/capital/applyBatch/transfer.js">
+	</script>
+</body>
+</html>

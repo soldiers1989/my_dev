@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.member.dao.BankCardDao">
+    <sql id="bankCardConditions">
+    	<where>
+			
+			<if test=" bankCard!= null ">
+				<if test="bankCard.id != null and bankCard.id != ''">
+					AND a.id = #{bankCard.id}
+				</if>
+				<if test="bankCard.userId != null and bankCard.userId != ''">
+					AND a.user_id = #{bankCard.userId}
+				</if>
+				<if test="bankCard.realName != null and bankCard.realName != ''">
+					AND a.real_name = #{bankCard.realName}
+				</if>
+				<if test="bankCard.idCard != null and bankCard.idCard != ''">
+					AND a.id_card = #{bankCard.idCard}
+				</if>
+				<if test="bankCard.type != null and bankCard.type != ''">
+					AND a.type = #{bankCard.type}
+				</if>
+				<if test="bankCard.cardNo != null and bankCard.cardNo != ''">
+					AND a.card_no = #{bankCard.cardNo}
+				</if>
+				<if test="bankCard.mobile != null and bankCard.mobile != ''">
+					AND a.mobile = #{bankCard.mobile}
+				</if>
+				<if test="bankCard.remark != null and bankCard.remark != ''">
+					AND a.remark = #{bankCard.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="BankCardVo">
+   		SELECT
+			<include refid="bankCardColumns"/>
+		FROM bank_card a
+		<include refid="bankCardConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM bank_card a
+		<include refid="bankCardConditions"/>
+   </select>
+   
+   <select id="query" resultType="BankCardVo">
+   		SELECT
+			<include refid="bankCardColumns"/>
+		FROM bank_card a
+		<include refid="bankCardConditions"/>
+   </select>
+   
+</mapper>

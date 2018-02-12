@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">需求ID：</label>
+								<div class="col-sm-8">
+									<input id="rentDemandId" name="rentDemandId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房东id：</label>
+								<div class="col-sm-8">
+									<input id="landlordId" name="landlordId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">需求匹配到的房源id：</label>
+								<div class="col-sm-8">
+									<input id="houseId" name="houseId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">省：</label>
+								<div class="col-sm-8">
+									<input id="provinceId" name="provinceId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">市：</label>
+								<div class="col-sm-8">
+									<input id="cityId" name="cityId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">大区：</label>
+								<div class="col-sm-8">
+									<input id="districtId" name="districtId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">板块：</label>
+								<div class="col-sm-8">
+									<input id="circleId" name="circleId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区名：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquName" name="xiaoquName" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区ID：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquId" name="xiaoquId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区地址：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquAddress" name="xiaoquAddress" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">楼栋号：</label>
+								<div class="col-sm-8">
+									<input id="loudonghao" name="loudonghao" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">单元号：</label>
+								<div class="col-sm-8">
+									<input id="danyuanhao" name="danyuanhao" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">室号：</label>
+								<div class="col-sm-8">
+									<input id="shihao" name="shihao" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">租金：</label>
+								<div class="col-sm-8">
+									<input id="amout" name="amout" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">室：</label>
+								<div class="col-sm-8">
+									<input id="room" name="room" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">厅：</label>
+								<div class="col-sm-8">
+									<input id="hall" name="hall" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">卫：</label>
+								<div class="col-sm-8">
+									<input id="bathRoom" name="bathRoom" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">面积（单位平方）：</label>
+								<div class="col-sm-8">
+									<input id="size" name="size" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">总层数：</label>
+								<div class="col-sm-8">
+									<input id="totalFloor" name="totalFloor" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">当前层数：</label>
+								<div class="col-sm-8">
+									<input id="currentFloor" name="currentFloor" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，装修(毛坯、简装、精装）：</label>
+								<div class="col-sm-8">
+									<input id="zhuangxiu" name="zhuangxiu" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，朝向（朝东、朝南、朝西、朝北）：</label>
+								<div class="col-sm-8">
+									<input id="chaoxiang" name="chaoxiang" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房源标签：</label>
+								<div class="col-sm-8">
+									<input id="houseLabels" name="houseLabels" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房屋设施：</label>
+								<div class="col-sm-8">
+									<input id="houseFacilityIds" name="houseFacilityIds" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房产证：</label>
+								<div class="col-sm-8">
+									<input id="houseCertificateImg" name="houseCertificateImg" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房屋图片：</label>
+								<div class="col-sm-8">
+									<input id="houseImgs" name="houseImgs" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，匹配状态（open,close)：</label>
+								<div class="col-sm-8">
+									<input id="matchStatus" name="matchStatus" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">租客要求：</label>
+								<div class="col-sm-8">
+									<input id="lodgerLabels" name="lodgerLabels" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，整租whole_rent，合租share_rent：</label>
+								<div class="col-sm-8">
+									<input id="rentType" name="rentType" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，房东sublet_no，租客sublet_yes：</label>
+								<div class="col-sm-8">
+									<input id="ownType" name="ownType" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房源简介：</label>
+								<div class="col-sm-8">
+									<input id="summary" name="summary" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，待审核wait_review，已审核review_pass，已驳回review_reject：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">隐藏状态(1-正常，0-隐藏)：</label>
+								<div class="col-sm-8">
+									<input id="hideFlag" name="hideFlag" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，定金状态(open,close)：</label>
+								<div class="col-sm-8">
+									<input id="depositStatus" name="depositStatus" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">审核通过时间：</label>
+								<div class="col-sm-8">
+									<input id="reviewSuccessDate" name="reviewSuccessDate" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="updateDate" name="updateDate" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房屋设施（字典）：</label>
+								<div class="col-sm-8">
+									<input id="facilitys" name="facilitys" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">封面照片：</label>
+								<div class="col-sm-8">
+									<input id="coverImg" name="coverImg" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">详情照片(最多8张)：</label>
+								<div class="col-sm-8">
+									<input id="detailImgs" name="detailImgs" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责人：</label>
+								<div class="col-sm-8">
+									<input id="assistantId" name="assistantId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，主卧first、次卧second、客卧guest：</label>
+								<div class="col-sm-8">
+									<input id="bedroomType" name="bedroomType" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">独用设施（字典）：</label>
+								<div class="col-sm-8">
+									<input id="privateFacilitys" name="privateFacilitys" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房间特色（字典）：</label>
+								<div class="col-sm-8">
+									<input id="features" name="features" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/match/apartmentMatchRecord/add.js">
+	</script>
+</body>
+</html>

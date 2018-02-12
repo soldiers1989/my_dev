@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${shareHouse.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">用户ID：</label>
+								<div class="col-sm-8">
+									<input id="userId" name="userId" th:value="${shareHouse.userId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责人：</label>
+								<div class="col-sm-8">
+									<input id="assistantId" name="assistantId" th:value="${shareHouse.assistantId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">室友：</label>
+								<div class="col-sm-8">
+									<input id="lodgerInfo" name="lodgerInfo" th:value="${shareHouse.lodgerInfo}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否转租：</label>
+								<div class="col-sm-8">
+									<select id="ownType" name="ownType" data-placeholder="是否转租" th:field="*{shareHouse.ownType}" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${ShareHouseOwnType}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">省：</label>
+								<div class="col-sm-8">
+									<input id="provinceId" name="provinceId" th:value="${shareHouse.provinceId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">市：</label>
+								<div class="col-sm-8">
+									<input id="cityId" name="cityId" th:value="${shareHouse.cityId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">大区：</label>
+								<div class="col-sm-8">
+									<input id="districtId" name="districtId" th:value="${shareHouse.districtId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">板块：</label>
+								<div class="col-sm-8">
+									<input id="circleId" name="circleId" th:value="${shareHouse.circleId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区名：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquName" name="xiaoquName" th:value="${shareHouse.xiaoquName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区ID：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquId" name="xiaoquId" th:value="${shareHouse.xiaoquId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区地址：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquAddress" name="xiaoquAddress" th:value="${shareHouse.xiaoquAddress}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">封面照片：</label>
+								<div class="col-sm-8">
+									<input id="coverImg" name="coverImg" th:value="${shareHouse.coverImg}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">详情图片：</label>
+								<div class="col-sm-8">
+									<input id="detailImgs" name="detailImgs" th:value="${shareHouse.detailImgs}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">楼栋号：</label>
+								<div class="col-sm-8">
+									<input id="loudonghao" name="loudonghao" th:value="${shareHouse.loudonghao}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">单元号：</label>
+								<div class="col-sm-8">
+									<input id="danyuanhao" name="danyuanhao" th:value="${shareHouse.danyuanhao}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">室号：</label>
+								<div class="col-sm-8">
+									<input id="shihao" name="shihao" th:value="${shareHouse.shihao}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">总层数：</label>
+								<div class="col-sm-8">
+									<input id="totalFloor" name="totalFloor" th:value="${shareHouse.totalFloor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">当前层数：</label>
+								<div class="col-sm-8">
+									<input id="currentFloor" name="currentFloor" th:value="${shareHouse.currentFloor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房间数：</label>
+								<div class="col-sm-8">
+									<input id="apartmentNum" name="apartmentNum" th:value="${shareHouse.apartmentNum}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">公用设施：</label>
+								<div class="col-sm-8">
+									<input id="publicFacilitys" name="publicFacilitys" th:value="${shareHouse.publicFacilitys}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">审核状态：</label>
+								<div class="col-sm-8">
+									<select id="status" name="status" data-placeholder="是否转租" th:field="*{shareHouse.status}" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${ShareHouseStatus}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">审核通过时间：</label>
+								<div class="col-sm-8">
+									<input id="reviewSuccessDate" name="reviewSuccessDate" th:value="${shareHouse.reviewSuccessDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否删除：</label>
+								<div class="col-sm-8">
+									<select id="hideFlag" name="hideFlag" data-placeholder="是否删除" th:field="*{shareHouse.hideFlag}" class="form-control chosen-select" tabindex="2" style="width: 100%">
+										<option value="1">是</option>
+										<option value="0">否</option>
+									</select>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${shareHouse.remark}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/rent/shareHouse/edit.js">
+	</script>
+</body>
+</html>

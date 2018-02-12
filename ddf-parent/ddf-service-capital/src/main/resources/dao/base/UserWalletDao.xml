@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.UserWalletDao">
+    
+	<sql id="userWalletColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.amount AS "amount",
+		a.freeze_amount AS "freezeAmount",
+		a.status AS "status",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="UserWallet">
+		SELECT 
+			<include refid="userWalletColumns"/>
+		FROM user_wallet a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO user_wallet(
+			id,
+			user_id,
+			amount,
+			freeze_amount,
+			status,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userId},
+			#{amount},
+			#{freezeAmount},
+			#{status},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE user_wallet SET 	
+			id = #{id},
+			user_id = #{userId},
+			amount = #{amount},
+			freeze_amount = #{freezeAmount},
+			status = #{status},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM user_wallet
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

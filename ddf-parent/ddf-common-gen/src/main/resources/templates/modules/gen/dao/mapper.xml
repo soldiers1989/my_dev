@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>mapper</name>
+	<filePath>${lastPackageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}Dao.xml</fileName>
+	<content><![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${basePackageName}.${bizPackageName}.dao.${ClassName}Dao">
+    
+    <#-- 输出字段列 -->
+	<sql id="${className}Columns">
+		<#assign columnField>
+			<#list table.columnList as c>
+		a.${c.name} AS "${c.javaFieldId}",
+			</#list>
+			<#list table.columnList as c>
+				<#if c.showType?? && c.showType == "userselect">
+					<#list c.javaFieldAttrs as a>
+		u${c_index + 1}.${a[1]} AS "${c.simpleJavaField}.${a[0]}",
+					</#list>
+				<#elseif c.showType?? && c.showType == "officeselect">
+					<#list c.javaFieldAttrs as a>
+		o${c_index + 1}.${a[1]} AS "${c.simpleJavaField}.${a[0]}",
+					</#list>
+				<#elseif c.showType?? && c.showType == "areaselect">
+					<#list c.javaFieldAttrs as a>
+		a${c_index + 1}.${a[1]} AS "${c.simpleJavaField}.${a[0]}",
+					</#list>
+				</#if>
+				<#-- 父表关联字段 -->
+				<#if table.parentExists && table.parentTableFk == c.name>
+					<#list c.javaFieldAttrs as a>
+		b.${a[1]} AS "${c.simpleJavaField}.${a[0]}",
+					</#list>
+				</#if>
+			</#list>
+		</#assign>
+${columnField?substring(0, columnField?last_index_of(","))}
+	</sql>
+    
+	<select id="query4id" resultType="${ClassName}">
+		SELECT 
+			<include refid="${className}Columns"/>
+		FROM ${table.name} a
+		WHERE a.id = ${"#"}{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO ${table.name}(
+		<#assign insertField>
+			<#list table.columnList as c>
+				<#if c.isInsert?? && c.isInsert == "1">
+			${c.name},
+				</#if>
+			</#list>
+		</#assign>
+${insertField?substring(0, insertField?last_index_of(","))}
+		) VALUES (
+		<#assign insertJavaField>
+			<#list table.columnList as c>
+				<#if c.isInsert?? && c.isInsert == "1">
+			${"#"}{${c.javaFieldId}},
+				</#if>
+			</#list>
+		</#assign>
+${insertJavaField?substring(0, insertJavaField?last_index_of(","))}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE ${table.name} SET 	
+			<#assign updateField>		
+				<#list table.columnList as c>
+					<#if c.isEdit?? && c.isEdit == "1">
+			${c.name} = ${"#"}{${c.javaFieldId}},
+					</#if>
+				</#list>
+			</#assign>
+${updateField?substring(0, updateField?last_index_of(","))}
+		WHERE id = ${"#"}{id}
+	</update>
+	
+	<update id="remove">
+	<#if table.delFlagExists>
+		UPDATE ${table.name} SET 
+			del_flag = ${"#"}{DEL_FLAG_DELETE}
+	<#else>
+		DELETE FROM ${table.name}
+	</#if>
+	<#if table.parentExists>
+		<#list table.columnList as c>
+			<#if table.parentTableFk == c.name>
+		<choose>
+			<when test="id !=null and id != ''">
+				WHERE id = ${"#"}{id}
+			</when>
+			<otherwise>
+				WHERE ${table.parentTableFk} = ${"#"}{${c.javaFieldId}}
+			</otherwise>
+		</choose>
+			</#if>
+		</#list>
+	<#else>
+		WHERE id = ${"#"}{id}
+	</#if>
+	</update>
+	
+</mapper>]]>
+	</content>
+</template>

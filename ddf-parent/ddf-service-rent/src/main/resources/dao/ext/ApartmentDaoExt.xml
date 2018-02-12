@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ApartmentDao">
+    <sql id="apartmentConditions">
+    	<where>
+			
+			<if test=" apartment!= null ">
+				<if test="apartment.id != null and apartment.id != ''">
+					AND a.id = #{apartment.id}
+				</if>
+				<if test="apartment.userId != null and apartment.userId != ''">
+					AND a.user_id = #{apartment.userId}
+				</if>
+				<if test="apartment.assistantId != null and apartment.assistantId != ''">
+					AND a.assistant_id = #{apartment.assistantId}
+				</if>
+				<if test="apartment.ownType != null">
+					AND a.own_type = #{apartment.ownType}
+				</if>
+				<if test="apartment.provinceId != null and apartment.provinceId != ''">
+					AND a.province_id = #{apartment.provinceId}
+				</if>
+				<if test="apartment.cityId != null and apartment.cityId != ''">
+					AND a.city_id = #{apartment.cityId}
+				</if>
+				<if test="apartment.districtId != null and apartment.districtId != ''">
+					AND a.district_id = #{apartment.districtId}
+				</if>
+				<if test="apartment.circleId != null and apartment.circleId != ''">
+					AND a.circle_id = #{apartment.circleId}
+				</if>
+				<if test="apartment.xiaoquName != null and apartment.xiaoquName != ''">
+					AND a.xiaoqu_name = #{apartment.xiaoquName}
+				</if>
+				<if test="apartment.xiaoquId != null and apartment.xiaoquId != ''">
+					AND a.xiaoqu_id = #{apartment.xiaoquId}
+				</if>
+				<if test="apartment.xiaoquAddress != null and apartment.xiaoquAddress != ''">
+					AND a.xiaoqu_address = #{apartment.xiaoquAddress}
+				</if>
+				<if test="apartment.coverImg != null and apartment.coverImg != ''">
+					AND a.cover_img = #{apartment.coverImg}
+				</if>
+				<if test="apartment.detailImgs != null and apartment.detailImgs != ''">
+					AND a.detail_imgs = #{apartment.detailImgs}
+				</if>
+				<if test="apartment.loudonghao != null and apartment.loudonghao != ''">
+					AND a.loudonghao = #{apartment.loudonghao}
+				</if>
+				<if test="apartment.danyuanhao != null and apartment.danyuanhao != ''">
+					AND a.danyuanhao = #{apartment.danyuanhao}
+				</if>
+				<if test="apartment.shihao != null and apartment.shihao != ''">
+					AND a.shihao = #{apartment.shihao}
+				</if>
+				<if test="apartment.totalFloor != null">
+					AND a.total_floor = #{apartment.totalFloor}
+				</if>
+				<if test="apartment.currentFloor != null">
+					AND a.current_floor = #{apartment.currentFloor}
+				</if>
+				<if test="apartment.room != null">
+					AND a.room = #{apartment.room}
+				</if>
+				<if test="apartment.hall != null">
+					AND a.hall = #{apartment.hall}
+				</if>
+				<if test="apartment.bathRoom != null">
+					AND a.bath_room = #{apartment.bathRoom}
+				</if>
+				<if test="apartment.zhuangxiu != null">
+					AND a.zhuangxiu = #{apartment.zhuangxiu}
+				</if>
+				<if test="apartment.chaoxiang != null">
+					AND a.chaoxiang = #{apartment.chaoxiang}
+				</if>
+				<if test="apartment.size != null">
+					AND a.size = #{apartment.size}
+				</if>
+				<if test="apartment.summary != null and apartment.summary != ''">
+					AND a.summary = #{apartment.summary}
+				</if>
+				<if test="apartment.facilitys != null and apartment.facilitys != ''">
+					AND a.facilitys = #{apartment.facilitys}
+				</if>
+				<if test="apartment.features != null and apartment.features != ''">
+					AND a.features = #{apartment.features}
+				</if>
+				<if test="apartment.amout != null">
+					AND a.amout = #{apartment.amout}
+				</if>
+				<if test="apartment.lodgerLabels != null and apartment.lodgerLabels != ''">
+					AND a.lodger_labels = #{apartment.lodgerLabels}
+				</if>
+				<if test="apartment.matchStatus != null">
+					AND a.match_status = #{apartment.matchStatus}
+				</if>
+				<if test="apartment.depositStatus != null">
+					AND a.deposit_status = #{apartment.depositStatus}
+				</if>
+				<if test="apartment.status != null">
+					AND a.status = #{apartment.status}
+				</if>
+				<if test="apartment.reviewSuccessDate != null">
+					AND a.review_success_date = #{apartment.reviewSuccessDate}
+				</if>
+				<if test="apartment.hideFlag != null">
+					AND a.hide_flag = #{apartment.hideFlag}
+				</if>
+				<if test="apartment.remark != null and apartment.remark != ''">
+					AND a.remark = #{apartment.remark}
+				</if>
+				<if test="apartment.createDate != null">
+					AND a.create_date = #{apartment.createDate}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+				<if test="apartment.updateDate != null">
+					AND a.update_date = #{apartment.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ApartmentVo">
+   		SELECT
+			<include refid="apartmentColumns"/>
+		FROM apartment a
+		<include refid="apartmentConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM apartment a
+		<include refid="apartmentConditions"/>
+   </select>
+   
+   <update id="remove4id">
+		UPDATE apartment SET 	
+			hide_flag = 1
+		WHERE id = #{id}
+	</update>
+</mapper>

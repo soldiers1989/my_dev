@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountXiaoquDao">
+    <sql id="monthRentAmountXiaoquConditions">
+    	<where>
+			
+			<if test=" monthRentAmountXiaoqu!= null ">
+				<if test="monthRentAmountXiaoqu.id != null and monthRentAmountXiaoqu.id != ''">
+					AND a.id = #{monthRentAmountXiaoqu.id}
+				</if>
+				<if test="monthRentAmountXiaoqu.xiaoquId != null and monthRentAmountXiaoqu.xiaoquId != ''">
+					AND a.xiaoqu_id = #{monthRentAmountXiaoqu.xiaoquId}
+				</if>
+				<if test="monthRentAmountXiaoqu.date != null and monthRentAmountXiaoqu.date != ''">
+					AND a.date = #{monthRentAmountXiaoqu.date}
+				</if>
+				<if test="monthRentAmountXiaoqu.bdate != null and monthRentAmountXiaoqu.bdate != ''">
+					AND a.bdate = #{monthRentAmountXiaoqu.bdate}
+				</if>
+				<if test="monthRentAmountXiaoqu.edate != null and monthRentAmountXiaoqu.edate != ''">
+					AND a.edate = #{monthRentAmountXiaoqu.edate}
+				</if>
+				<if test="monthRentAmountXiaoqu.status != null">
+					AND a.status = #{monthRentAmountXiaoqu.status}
+				</if>
+				<if test="monthRentAmountXiaoqu.statsDate != null and monthRentAmountXiaoqu.statsDate != ''">
+					AND a.stats_date = #{monthRentAmountXiaoqu.statsDate}
+				</if>
+				<if test="monthRentAmountXiaoqu.oneRoomAmount != null and monthRentAmountXiaoqu.oneRoomAmount != ''">
+					AND a.one_room_amount = #{monthRentAmountXiaoqu.oneRoomAmount}
+				</if>
+				<if test="monthRentAmountXiaoqu.twoRoomAmount != null and monthRentAmountXiaoqu.twoRoomAmount != ''">
+					AND a.two_room_amount = #{monthRentAmountXiaoqu.twoRoomAmount}
+				</if>
+				<if test="monthRentAmountXiaoqu.threeRoomAmount != null and monthRentAmountXiaoqu.threeRoomAmount != ''">
+					AND a.three_room_amount = #{monthRentAmountXiaoqu.threeRoomAmount}
+				</if>
+				<if test="monthRentAmountXiaoqu.calOneRoomAmount != null and monthRentAmountXiaoqu.calOneRoomAmount != ''">
+					AND a.cal_one_room_amount = #{monthRentAmountXiaoqu.calOneRoomAmount}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MonthRentAmountXiaoquVo">
+   		SELECT
+			<include refid="monthRentAmountXiaoquColumns"/>
+		FROM month_rent_amount_xiaoqu a
+		<include refid="monthRentAmountXiaoquConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM month_rent_amount_xiaoqu a
+		<include refid="monthRentAmountXiaoquConditions"/>
+   </select>
+	<select id="findListByDateAndStatus" resultType="MonthRentAmountXiaoquVo">
+		SELECT
+			<include refid="monthRentAmountXiaoquColumns"/>
+		FROM
+		month_rent_amount_xiaoqu a
+		WHERE
+		edate <![CDATA[<]]> NOW()
+		AND `status` = 'WAIT'
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+	</select>
+	<update id="statsModify">
+		UPDATE month_rent_amount_xiaoqu SET
+		status = #{status},
+		stats_date = #{statsDate},
+		one_room_amount = #{oneRoomAmount},
+		two_room_amount = #{twoRoomAmount},
+		three_room_amount = #{threeRoomAmount},
+		cal_one_room_amount = #{calOneRoomAmount}
+		WHERE id = #{id}
+	</update>
+	<update id="removeByDate">
+		DELETE FROM month_rent_amount_xiaoqu
+		WHERE date = #{date}
+	</update>
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO month_rent_amount_xiaoqu(
+		id,
+		xiaoqu_id,
+		date,
+		stats_date,
+		one_room_amount,
+		two_room_amount,
+		three_room_amount,
+		cal_one_room_amount,
+		bdate,
+		edate,
+		status
+		) VALUES
+		<foreach collection="insertList" item="item" index="index" separator="," >
+			(#{item.id},
+			#{item.xiaoquId},
+			#{item.date},
+			#{item.statsDate},
+			#{item.oneRoomAmount},
+			#{item.twoRoomAmount},
+			#{item.threeRoomAmount},
+			#{item.calOneRoomAmount},
+			#{item.bdate},
+			#{item.edate},
+			#{item.status})
+		</foreach>
+	</insert>
+	
+	<select id="find4thisMonth" resultType="MonthRentAmountXiaoquVo">
+		SELECT
+			<include refid="monthRentAmountXiaoquColumns"/>
+		FROM
+		month_rent_amount_xiaoqu a
+		WHERE
+		a.xiaoqu_id=#{xiaoquId} and DATE_FORMAT( a.stats_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' );
+	</select>
+</mapper>

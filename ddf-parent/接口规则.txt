@@ -1,0 +1,33 @@
+规则：
+	{实体}/{操作}		（仿造阿里巴巴接口：https://docs.open.alipay.com/api_6）
+	（名词）/（动词）
+说明：
+1，动词在实体类后面，比如：
+	用户重置密码，应该是：/user/password/reset；而不是：/user/reset/password	(主谓颠倒）
+	发送短信，应该是：/shotMessage/send；而不是/shortMessage/sendMessage		（存在宾语）
+	
+2，操作，一般为动词，比如：增create,删remove,查query,,改modify,取消cancel,审核review，举例：
+	创建房源：/house/create
+	审核房源：/house/review
+	
+3,统计查询在query前面加上count
+	房源总行数：/house/count/query
+
+4，批量的操作在动词前加上batch，当分页时动词前加上query举例：
+	批量查询：batchquery
+	批量删除：batchremove
+	分页查询：pagequery
+  
+
+5，到有明确条件为“我的”,“父”，“子”时，在{实体}后面加"my","parent","child"，举例：
+	我的房源：			/house/my/batchquery
+	Area的父对象：		/area/parent/query
+	Area的所有的父对象：   /area/parent/batchquery
+	Area子列表：			/area/child/batchquery
+		
+
+6，当有明确的条件在接口上时，应该使用/{实体}/{条件对象}/{条件值}/{操作}，举例：
+	按地铁线，查询地铁站：metroStation/metroLine/{metroLineId}/batchquery
+
+7，避免接口过多；同一对象接口非常类似，可以考虑合并，通过参数实现，举例：
+	审核通过和审核驳回，可以使用：/review?status=?，没必要写成 /review/pass,/review/reject

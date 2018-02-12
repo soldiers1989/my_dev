@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.dic.dao.XiaoquDao">
+    
+	<sql id="xiaoquColumns">
+		a.id AS "id",
+		a.province_id AS "provinceId",
+		a.city_id AS "cityId",
+		a.district_id AS "districtId",
+		a.circle_id AS "circleId",
+		a.name AS "name",
+		a.address AS "address",
+		a.opinion_level AS "opinionLevel",
+		a.opinion_content AS "opinionContent",
+		a.lng AS "lng",
+		a.lat AS "lat",
+		a.imgs AS "imgs",
+		a.build_age AS "buildAge",
+		a.loop_line AS "loopLine",
+		a.property_type AS "propertyType",
+		a.property_company AS "propertyCompany",
+		a.property_amount AS "propertyAmount",
+		a.developers AS "developers",
+		a.display_state AS "displayState",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="Xiaoqu">
+		SELECT 
+			<include refid="xiaoquColumns"/>
+		FROM xiaoqu a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO xiaoqu(
+			id,
+			province_id,
+			city_id,
+			district_id,
+			circle_id,
+			name,
+			address,
+			opinion_level,
+			opinion_content,
+			lng,
+			lat,
+			imgs,
+			build_age,
+			loop_line,
+			property_type,
+			property_company,
+			property_amount,
+			developers,
+			display_state,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{circleId},
+			#{name},
+			#{address},
+			#{opinionLevel},
+			#{opinionContent},
+			#{lng},
+			#{lat},
+			#{imgs},
+			#{buildAge},
+			#{loopLine},
+			#{propertyType},
+			#{propertyCompany},
+			#{propertyAmount},
+			#{developers},
+			#{displayState},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE xiaoqu SET 	
+			id = #{id},
+			province_id = #{provinceId},
+			city_id = #{cityId},
+			district_id = #{districtId},
+			circle_id = #{circleId},
+			name = #{name},
+			address = #{address},
+			opinion_level = #{opinionLevel},
+			opinion_content = #{opinionContent},
+			lng = #{lng},
+			lat = #{lat},
+			imgs = #{imgs},
+			build_age = #{buildAge},
+			loop_line = #{loopLine},
+			property_type = #{propertyType},
+			property_company = #{propertyCompany},
+			property_amount = #{propertyAmount},
+			developers = #{developers},
+			display_state = #{displayState},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM xiaoqu
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

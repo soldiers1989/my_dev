@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>entityVo</name>
+	<filePath>${packageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}Vo.java</fileName>
+	<content><![CDATA[
+
+package ${basePackageName}.entity.${bizPackageName}.vo;
+
+import ${basePackageName}.entity.${bizPackageName}.dto.${ClassName};
+
+/**
+ * ${functionName}EntityVo
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+public class ${ClassName}Vo extends ${ClassName} {
+	
+	private static final long serialVersionUID = 1L;
+}]]>
+	</content>
+</template>

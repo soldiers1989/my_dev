@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">小区名称：</label>
+                            <div class="col-sm-8">
+                                <input id="name" name="name" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">小区照片：</label>
+                            <div class="col-sm-8">
+                                <input id="imgs" name="imgs" class="form-control" type="file">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">城市：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="环线" class="form-control chosen-select"
+                                        tabindex="2" style="width: 100%" id="cityId">
+                                    <option value="">全部</option>
+                                    <option th:each="var : ${cityList}" th:text="${var.name}" th:value="${var.id}" />
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">大区：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="大区" class="form-control chosen-select"
+                                        tabindex="2" style="width: 100%" id="districtId">
+                                    <option value=""> 请选择 </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商圈：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="商圈" class="form-control chosen-select"
+                                        tabindex="2" style="width: 100%" id="circleId">
+                                    <option value=""> 请选择 </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">地址：</label>
+                            <div class="col-sm-8">
+                                <input id="address" name="address" class="form-control" type="text">
+                            </div>
+                        </div>
+<!--                        <div class="form-group">
+                            <label class="col-sm-3 control-label">评论等级：</label>
+                            <div class="col-sm-8">
+                                <input id="opinionLevel" name="opinionLevel" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">评论内容：</label>
+                            <div class="col-sm-8">
+                                <input id="opinionContent" name="opinionContent" class="form-control" type="text">
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-8">
+                                <div id="container" style="width: 600px;height: 500px"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">经度：</label>
+                            <div class="col-sm-8">
+                                <input id="lng" name="lng" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">纬度：</label>
+                            <div class="col-sm-8">
+                                <input id="lat" name="lat" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">建造年代：</label>
+                            <div class="col-sm-8">
+                                <input id="buildAge" name="buildAge" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">环线：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="环线" class="form-control chosen-select"
+                                        tabindex="2" style="width: 100%" id="loopLine">
+                                    <option value=""> 请选择 </option>
+                                    <option th:each="state : ${loopLineList}" th:text="${state.explain}" th:value="${state}" />
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">物业 类型：</label>
+                            <div class="col-sm-8">
+                                <input id="propertyType" name="propertyType" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">物业公司：</label>
+                            <div class="col-sm-8">
+                                <input id="propertyCompany" name="propertyCompany" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">物业费：</label>
+                            <div class="col-sm-8">
+                                <input id="propertyAmount" name="propertyAmount" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">开发商：</label>
+                            <div class="col-sm-8">
+                                <input id="developers" name="developers" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">展示状态：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="环线" class="form-control chosen-select"
+                                        tabindex="2" style="width: 100%" id="displayState">
+                                    <!--<option value="">全部</option>-->
+                                    <option value="1">对外</option>
+                                    <option value="0">对内</option>
+                                </select>
+                            </div>
+                        </div>
+<!--                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-8">
+                                <input id="remark" name="remark" class="form-control" type="text">
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/dic/xiaoqu/add.js"></script>
+<script type="text/javascript" src="/js/baidu.map.js"></script>
+<script>
+    map.addEventListener("click", function (e) {
+        var lng = e.point.lng;
+        var lat = e.point.lat;
+//        alert("获取到的坐标：" + lng + ", " + lat);
+        $('#lng').val(lng);
+        $('#lat').val(lat);
+        var pt = e.point;
+        geoc.getLocation(pt, function(rs){
+            var addComp = rs.addressComponents;
+            var address = addComp.province + addComp.city + addComp.district  + addComp.street  + addComp.streetNumber;
+            $('#address').val(address);
+//            alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+        });
+
+    });
+</script>
+</body>
+</html>

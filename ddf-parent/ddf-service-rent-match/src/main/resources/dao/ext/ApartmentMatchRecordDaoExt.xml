@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.match.dao.ApartmentMatchRecordDao">
+    <sql id="apartmentMatchRecordConditions">
+    	<where>
+			
+			<if test=" apartmentMatchRecord!= null ">
+				<if test="apartmentMatchRecord.id != null and apartmentMatchRecord.id != ''">
+					AND a.id = #{apartmentMatchRecord.id}
+				</if>
+				<if test="apartmentMatchRecord.rentDemandId != null and apartmentMatchRecord.rentDemandId != ''">
+					AND a.rent_demand_id = #{apartmentMatchRecord.rentDemandId}
+				</if>
+				<if test="apartmentMatchRecord.landlordId != null and apartmentMatchRecord.landlordId != ''">
+					AND a.landlord_id = #{apartmentMatchRecord.landlordId}
+				</if>
+				<if test="apartmentMatchRecord.apartmentId != null and apartmentMatchRecord.apartmentId != ''">
+					AND a.apartment_id = #{apartmentMatchRecord.apartmentId}
+				</if>
+				<if test="apartmentMatchRecord.provinceId != null and apartmentMatchRecord.provinceId != ''">
+					AND a.province_id = #{apartmentMatchRecord.provinceId}
+				</if>
+				<if test="apartmentMatchRecord.cityId != null and apartmentMatchRecord.cityId != ''">
+					AND a.city_id = #{apartmentMatchRecord.cityId}
+				</if>
+				<if test="apartmentMatchRecord.districtId != null and apartmentMatchRecord.districtId != ''">
+					AND a.district_id = #{apartmentMatchRecord.districtId}
+				</if>
+				<if test="apartmentMatchRecord.circleId != null and apartmentMatchRecord.circleId != ''">
+					AND a.circle_id = #{apartmentMatchRecord.circleId}
+				</if>
+				<if test="apartmentMatchRecord.xiaoquName != null and apartmentMatchRecord.xiaoquName != ''">
+					AND a.xiaoqu_name = #{apartmentMatchRecord.xiaoquName}
+				</if>
+				<if test="apartmentMatchRecord.xiaoquId != null and apartmentMatchRecord.xiaoquId != ''">
+					AND a.xiaoqu_id = #{apartmentMatchRecord.xiaoquId}
+				</if>
+				<if test="apartmentMatchRecord.xiaoquAddress != null and apartmentMatchRecord.xiaoquAddress != ''">
+					AND a.xiaoqu_address = #{apartmentMatchRecord.xiaoquAddress}
+				</if>
+				<if test="apartmentMatchRecord.loudonghao != null and apartmentMatchRecord.loudonghao != ''">
+					AND a.loudonghao = #{apartmentMatchRecord.loudonghao}
+				</if>
+				<if test="apartmentMatchRecord.danyuanhao != null and apartmentMatchRecord.danyuanhao != ''">
+					AND a.danyuanhao = #{apartmentMatchRecord.danyuanhao}
+				</if>
+				<if test="apartmentMatchRecord.shihao != null and apartmentMatchRecord.shihao != ''">
+					AND a.shihao = #{apartmentMatchRecord.shihao}
+				</if>
+				<if test="apartmentMatchRecord.amout != null">
+					AND a.amout = #{apartmentMatchRecord.amout}
+				</if>
+				<if test="apartmentMatchRecord.room != null">
+					AND a.room = #{apartmentMatchRecord.room}
+				</if>
+				<if test="apartmentMatchRecord.hall != null">
+					AND a.hall = #{apartmentMatchRecord.hall}
+				</if>
+				<if test="apartmentMatchRecord.bathRoom != null">
+					AND a.bath_room = #{apartmentMatchRecord.bathRoom}
+				</if>
+				<if test="apartmentMatchRecord.size != null">
+					AND a.size = #{apartmentMatchRecord.size}
+				</if>
+				<if test="apartmentMatchRecord.totalFloor != null">
+					AND a.total_floor = #{apartmentMatchRecord.totalFloor}
+				</if>
+				<if test="apartmentMatchRecord.currentFloor != null">
+					AND a.current_floor = #{apartmentMatchRecord.currentFloor}
+				</if>
+				<if test="apartmentMatchRecord.zhuangxiu != null">
+					AND a.zhuangxiu = #{apartmentMatchRecord.zhuangxiu}
+				</if>
+				<if test="apartmentMatchRecord.chaoxiang != null">
+					AND a.chaoxiang = #{apartmentMatchRecord.chaoxiang}
+				</if>
+				<if test="apartmentMatchRecord.houseLabels != null and apartmentMatchRecord.houseLabels != ''">
+					AND a.house_labels = #{apartmentMatchRecord.houseLabels}
+				</if>
+				<if test="apartmentMatchRecord.houseFacilityIds != null and apartmentMatchRecord.houseFacilityIds != ''">
+					AND a.house_facility_ids = #{apartmentMatchRecord.houseFacilityIds}
+				</if>
+				<if test="apartmentMatchRecord.houseCertificateImg != null and apartmentMatchRecord.houseCertificateImg != ''">
+					AND a.house_certificate_img = #{apartmentMatchRecord.houseCertificateImg}
+				</if>
+				<if test="apartmentMatchRecord.houseImgs != null and apartmentMatchRecord.houseImgs != ''">
+					AND a.house_imgs = #{apartmentMatchRecord.houseImgs}
+				</if>
+				<if test="apartmentMatchRecord.matchStatus != null">
+					AND a.match_status = #{apartmentMatchRecord.matchStatus}
+				</if>
+				<if test="apartmentMatchRecord.lodgerLabels != null and apartmentMatchRecord.lodgerLabels != ''">
+					AND a.lodger_labels = #{apartmentMatchRecord.lodgerLabels}
+				</if>
+				<if test="apartmentMatchRecord.rentType != null">
+					AND a.rent_type = #{apartmentMatchRecord.rentType}
+				</if>
+				<if test="apartmentMatchRecord.summary != null and apartmentMatchRecord.summary != ''">
+					AND a.summary = #{apartmentMatchRecord.summary}
+				</if>
+				<if test="apartmentMatchRecord.status != null">
+					AND a.status = #{apartmentMatchRecord.status}
+				</if>
+				<if test="apartmentMatchRecord.hideFlag != null">
+					AND a.hide_flag = #{apartmentMatchRecord.hideFlag}
+				</if>
+				<if test="apartmentMatchRecord.depositStatus != null">
+					AND a.deposit_status = #{apartmentMatchRecord.depositStatus}
+				</if>
+				<if test="apartmentMatchRecord.remark != null and apartmentMatchRecord.remark != ''">
+					AND a.remark = #{apartmentMatchRecord.remark}
+				</if>
+				<if test="apartmentMatchRecord.reviewSuccessDate != null">
+					AND a.review_success_date = #{apartmentMatchRecord.reviewSuccessDate}
+				</if>
+				<if test="apartmentMatchRecord.createDate != null">
+					AND a.create_date = #{apartmentMatchRecord.createDate}
+				</if>
+				<if test="apartmentMatchRecord.updateDate != null">
+					AND a.update_date = #{apartmentMatchRecord.updateDate}
+				</if>
+				<if test="apartmentMatchRecord.facilitys != null and apartmentMatchRecord.facilitys != ''">
+					AND a.facilitys = #{apartmentMatchRecord.facilitys}
+				</if>
+				<if test="apartmentMatchRecord.coverImg != null and apartmentMatchRecord.coverImg != ''">
+					AND a.cover_img = #{apartmentMatchRecord.coverImg}
+				</if>
+				<if test="apartmentMatchRecord.detailImgs != null and apartmentMatchRecord.detailImgs != ''">
+					AND a.detail_imgs = #{apartmentMatchRecord.detailImgs}
+				</if>
+				<if test="apartmentMatchRecord.assistantId != null and apartmentMatchRecord.assistantId != ''">
+					AND a.assistant_id = #{apartmentMatchRecord.assistantId}
+				</if>
+				<if test="apartmentMatchRecord.bedroomType != null">
+					AND a.bedroom_type = #{apartmentMatchRecord.bedroomType}
+				</if>
+				<if test="apartmentMatchRecord.privateFacilitys != null and apartmentMatchRecord.privateFacilitys != ''">
+					AND a.private_facilitys = #{apartmentMatchRecord.privateFacilitys}
+				</if>
+				<if test="apartmentMatchRecord.features != null and apartmentMatchRecord.features != ''">
+					AND a.features = #{apartmentMatchRecord.features}
+				</if>
+				<if test="apartmentMatchRecord.ownType != null">
+					AND a.own_type = #{apartmentMatchRecord.ownType}
+				</if>
+				<if test="apartmentMatchRecord.matchDate != null">
+					AND a.match_date = #{apartmentMatchRecord.matchDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ApartmentMatchRecordVo">
+   		SELECT
+			<include refid="apartmentMatchRecordColumns"/>
+		FROM apartment_match_record a
+		<include refid="apartmentMatchRecordConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM apartment_match_record a
+		<include refid="apartmentMatchRecordConditions"/>
+   </select>
+</mapper>

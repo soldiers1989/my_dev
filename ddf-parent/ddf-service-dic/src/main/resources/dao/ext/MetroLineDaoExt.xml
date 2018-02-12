@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.dic.dao.MetroLineDao">
+    <sql id="metroLineConditions">
+    	<where>
+			
+			<if test=" metroLine!= null ">
+				<if test="metroLine.id != null and metroLine.id != ''">
+					AND a.id = #{metroLine.id}
+				</if>
+				<if test="metroLine.name != null and metroLine.name != ''">
+					AND a.name = #{metroLine.name}
+				</if>
+				<if test="metroLine.sort != null and metroLine.sort != ''">
+					AND a.sort = #{metroLine.sort}
+				</if>
+				<if test="metroLine.lng != null and metroLine.lng != ''">
+					AND a.lng = #{metroLine.lng}
+				</if>
+				<if test="metroLine.lat != null and metroLine.lat != ''">
+					AND a.lat = #{metroLine.lat}
+				</if>
+				<if test="metroLine.cityId != null and metroLine.cityId != ''">
+					AND a.city_id = #{metroLine.cityId}
+				</if>
+				<if test="metroLine.remark != null and metroLine.remark != ''">
+					AND a.remark = #{metroLine.remark}
+				</if>
+				<if test="metroLine.createDate != null and metroLine.createDate != ''">
+					AND a.create_date = #{metroLine.createDate}
+				</if>
+				<if test="metroLine.updateDate != null and metroLine.updateDate != ''">
+					AND a.update_date = #{metroLine.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MetroLineVo">
+   		SELECT
+			<include refid="metroLineColumns"/>
+		FROM metro_line a
+		<include refid="metroLineConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM metro_line a
+		<include refid="metroLineConditions"/>
+   </select>
+</mapper>

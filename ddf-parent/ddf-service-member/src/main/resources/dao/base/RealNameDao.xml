@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.member.dao.RealNameDao">
+    
+	<sql id="realNameColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.real_name AS "realName",
+		a.id_card AS "idCard",
+		a.face_img AS "faceImg",
+		a.back_img AS "backImg",
+		a.status AS "status",
+		a.review_remark AS "reviewRemark",
+		a.type AS "type",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="RealName">
+		SELECT 
+			<include refid="realNameColumns"/>
+		FROM real_name a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO real_name(
+			id,
+			user_id,
+			real_name,
+			id_card,
+			face_img,
+			back_img,
+			status,
+			review_remark,
+			type,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userId},
+			#{realName},
+			#{idCard},
+			#{faceImg},
+			#{backImg},
+			#{status},
+			#{reviewRemark},
+			#{type},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE real_name SET 	
+			user_id = #{userId},
+			real_name = #{realName},
+			id_card = #{idCard},
+			face_img = #{faceImg},
+			back_img = #{backImg},
+			status = #{status},
+			review_remark = #{reviewRemark},
+			type = #{type},
+			remark = #{remark},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM real_name
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

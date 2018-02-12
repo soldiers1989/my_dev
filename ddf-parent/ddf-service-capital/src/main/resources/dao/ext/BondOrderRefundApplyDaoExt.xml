@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.BondOrderRefundApplyDao">
+    <sql id="bondOrderRefundApplyConditions">
+    	<where>
+			
+			<if test=" bondOrderRefundApply!= null ">
+				<if test="bondOrderRefundApply.id != null and bondOrderRefundApply.id != ''">
+					AND a.id = #{bondOrderRefundApply.id}
+				</if>
+				<if test="bondOrderRefundApply.bondOrderId != null and bondOrderRefundApply.bondOrderId != ''">
+					AND a.bond_order_id = #{bondOrderRefundApply.bondOrderId}
+				</if>
+				<if test="bondOrderRefundApply.no != null and bondOrderRefundApply.no != ''">
+					AND a.no = #{bondOrderRefundApply.no}
+				</if>
+				<if test="bondOrderRefundApply.status != null and bondOrderRefundApply.status != ''">
+					AND a.status = #{bondOrderRefundApply.status}
+				</if>
+				<if test="bondOrderRefundApply.remark != null and bondOrderRefundApply.remark != ''">
+					AND a.remark = #{bondOrderRefundApply.remark}
+				</if>
+				<if test="bondOrderRefundApply.createDate != null and bondOrderRefundApply.createDate != ''">
+					AND a.create_date = #{bondOrderRefundApply.createDate}
+				</if>
+				<if test="bondOrderRefundApply.updateDate != null and bondOrderRefundApply.updateDate != ''">
+					AND a.update_date = #{bondOrderRefundApply.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="BondOrderRefundApplyVo">
+   		SELECT
+			<include refid="bondOrderRefundApplyColumns"/>
+		FROM bond_order_refund_apply a
+		<include refid="bondOrderRefundApplyConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM bond_order_refund_apply a
+		<include refid="bondOrderRefundApplyConditions"/>
+   </select>
+   
+   <select id="query4BondOrderId" resultType="BondOrderRefundApplyVo">
+   		SELECT
+			<include refid="bondOrderRefundApplyColumns"/>
+		FROM bond_order_refund_apply a
+		<where>
+			<if test="bondOrderId != null and bondOrderId != ''">
+				AND a.bond_order_id = #{bondOrderId}
+			</if>
+		</where>
+   </select>
+</mapper>

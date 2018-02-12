@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.sms.dao.ShortMessageDao">
+    <sql id="shortMessageConditions">
+    	<where>
+			
+			<if test=" shortMessage!= null ">
+				<if test="shortMessage.id != null and shortMessage.id != ''">
+					AND a.id = #{shortMessage.id}
+				</if>
+				<if test="shortMessage.mobile != null and shortMessage.mobile != ''">
+					AND a.mobile = #{shortMessage.mobile}
+				</if>
+				<if test="shortMessage.type != null and shortMessage.type != ''">
+					AND a.type = #{shortMessage.type}
+				</if>
+				<if test="shortMessage.content != null and shortMessage.content != ''">
+					AND a.content = #{shortMessage.content}
+				</if>
+				<if test="shortMessage.remark != null and shortMessage.remark != ''">
+					AND a.remark = #{shortMessage.remark}
+				</if>
+				<if test="shortMessage.createDate != null and shortMessage.createDate != ''">
+					AND a.create_date = #{shortMessage.createDate}
+				</if>
+				<if test="shortMessage.updateDate != null and shortMessage.updateDate != ''">
+					AND a.update_date = #{shortMessage.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ShortMessageVo">
+   		SELECT
+			<include refid="shortMessageColumns"/>
+		FROM short_message a
+		<include refid="shortMessageConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM short_message a
+		<include refid="shortMessageConditions"/>
+   </select>
+</mapper>

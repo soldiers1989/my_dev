@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	
+	<!-- 配置数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${dataSource.url}" />
+		<property name="username" value="${dataSource.username}" />
+		<property name="password" value="${dataSource.password}" />
+		<property name="initialSize" value="10"/>
+	    <property name="maxActive" value="60"/>
+	    <property name="minIdle" value="20"/>
+	  	<property name="maxWait" value="10000" />
+	    <property name="testOnBorrow" value="false"></property>
+		<property name="testOnReturn" value="false"></property>
+		<property name="testWhileIdle" value="true"></property>
+		<property name="validationQuery" value="SELECT 1 from dual"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="filters" value="config" />
+        <property name="connectionProperties" value="config.decrypt=true" />
+	</bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    	<property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">  
+	   <constructor-arg ref="dataSource" />
+	</bean>  
+    <!-- <bean id="baseDao" class="com.ddf.component.dao.api.impl.BaseDao" abstract="true">
+    	<property name="jdbcTemplate">
+    		<bean class="org.springframework.jdbc.core.JdbcTemplate">
+            	<property name="dataSource" ref="dataSource" />
+		   	</bean>
+    	</property>
+    	<property name="sqlBuildUtil">  
+            <bean class="com.ddf.component.dao.util.SqlBuildUtil">
+            	<property name="redisApi" ref="redisApi" />
+		   	</bean>
+		</property>
+    </bean> -->
+</beans>

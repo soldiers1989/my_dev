@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ShareApartmentDao">
+    <sql id="shareApartmentConditions">
+    	<where>
+			
+			<if test=" shareApartment!= null ">
+				<if test="shareApartment.id != null and shareApartment.id != ''">
+					AND a.id = #{shareApartment.id}
+				</if>
+				<if test="shareApartment.houseId != null and shareApartment.houseId != ''">
+					AND a.house_id = #{shareApartment.houseId}
+				</if>
+				<if test="shareApartment.userId != null and shareApartment.userId != ''">
+					AND a.user_id = #{shareApartment.userId}
+				</if>
+				<if test="shareApartment.name != null and shareApartment.name != ''">
+					AND a.name = #{shareApartment.name}
+				</if>
+				<if test="shareApartment.coverImg != null and shareApartment.coverImg != ''">
+					AND a.cover_img = #{shareApartment.coverImg}
+				</if>
+				<if test="shareApartment.detailImgs != null and shareApartment.detailImgs != ''">
+					AND a.detail_imgs = #{shareApartment.detailImgs}
+				</if>
+				<if test="shareApartment.bedroomType != null">
+					AND a.bedroom_type = #{shareApartment.bedroomType}
+				</if>
+				<if test="shareApartment.zhuangxiu != null">
+					AND a.zhuangxiu = #{shareApartment.zhuangxiu}
+				</if>
+				<if test="shareApartment.chaoxiang != null">
+					AND a.chaoxiang = #{shareApartment.chaoxiang}
+				</if>
+				<if test="shareApartment.size != null">
+					AND a.size = #{shareApartment.size}
+				</if>
+				<if test="shareApartment.summary != null and shareApartment.summary != ''">
+					AND a.summary = #{shareApartment.summary}
+				</if>
+				<if test="shareApartment.privateFacilitys != null and shareApartment.privateFacilitys != ''">
+					AND a.private_facilitys = #{shareApartment.privateFacilitys}
+				</if>
+				<if test="shareApartment.features != null and shareApartment.features != ''">
+					AND a.features = #{shareApartment.features}
+				</if>
+				<if test="shareApartment.matchStatus != null">
+					AND a.match_status = #{shareApartment.matchStatus}
+				</if>
+				<if test="shareApartment.amout != null">
+					AND a.amout = #{shareApartment.amout}
+				</if>
+				<if test="shareApartment.lodgerLabels != null and shareApartment.lodgerLabels != ''">
+					AND a.lodger_labels = #{shareApartment.lodgerLabels}
+				</if>
+				<if test="shareApartment.depositStatus != null">
+					AND a.deposit_status = #{shareApartment.depositStatus}
+				</if>
+				<if test="shareApartment.status != null">
+					AND a.status = #{shareApartment.status}
+				</if>
+				<if test="shareApartment.reviewSuccessDate != null">
+					AND a.review_success_date = #{shareApartment.reviewSuccessDate}
+				</if>
+				<if test="shareApartment.hideFlag != null">
+					AND a.hide_flag = #{shareApartment.hideFlag}
+				</if>
+				<if test="shareApartment.remark != null and shareApartment.remark != ''">
+					AND a.remark = #{shareApartment.remark}
+				</if>
+				<if test="shareApartment.createDate != null">
+					AND a.create_date = #{shareApartment.createDate}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+				<if test="shareApartment.updateDate != null">
+					AND a.update_date = #{shareApartment.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ShareApartmentVo">
+   		SELECT
+			<include refid="shareApartmentColumns"/>
+		FROM share_apartment a
+		<include refid="shareApartmentConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM share_apartment a
+		<include refid="shareApartmentConditions"/>
+   </select>
+   
+    <update id="remove4id">
+		UPDATE share_apartment SET 	
+			hide_flag = 1
+		WHERE id = #{id}
+	</update>
+
+    <update id="remove4houseId">
+		UPDATE share_apartment SET 	
+			hide_flag = 1
+		WHERE house_id = #{houseId}
+	</update>
+	
+	<select id="query4houseId4minAmout4openStatus" resultType="ShareApartmentVo">
+   		SELECT
+			<include refid="shareApartmentColumns"/>
+		FROM share_apartment a
+		WHERE a.house_id = #{houseId} AND a.match_status = #{matchStatus}  AND a.hide_flag = '0'
+		ORDER BY a.amout ASC
+		LIMIT 0,1
+   </select> 	 
+</mapper>

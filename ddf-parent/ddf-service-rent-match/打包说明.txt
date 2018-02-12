@@ -1,0 +1,3 @@
+打包目录：ddf-parent
+打包指令：mvn clean package -Dmaven.test.skip=true -am -pl ddf-service-rent-match
+运行指令：java -jar -Dspring.profiles.active=dev|test|pro ddf-service-rent-match.jar

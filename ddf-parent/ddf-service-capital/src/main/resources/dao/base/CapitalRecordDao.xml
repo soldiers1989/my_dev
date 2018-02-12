@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.CapitalRecordDao">
+    
+	<sql id="capitalRecordColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.no AS "no",
+		a.amount AS "amount",
+		a.type AS "type",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="CapitalRecord">
+		SELECT 
+			<include refid="capitalRecordColumns"/>
+		FROM capital_record a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO capital_record(
+			id,
+			user_id,
+			no,
+			amount,
+			type,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userId},
+			#{no},
+			#{amount},
+			#{type},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE capital_record SET 	
+			user_id = #{userId},
+			no = #{no},
+			amount = #{amount},
+			type = #{type},
+			remark = #{remark},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM capital_record
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

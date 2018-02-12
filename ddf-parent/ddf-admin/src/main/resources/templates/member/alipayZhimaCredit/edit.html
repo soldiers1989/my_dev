@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${alipayZhimaCredit.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">用户ID：</label>
+								<div class="col-sm-8">
+									<input id="userId" name="userId" th:value="${alipayZhimaCredit.userId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">业务类型：</label>
+								<div class="col-sm-8">
+									<input id="type" name="type" th:value="${alipayZhimaCredit.type}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">图片：</label>
+								<div class="col-sm-8">
+									<input id="img" name="img" th:value="${alipayZhimaCredit.img}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">标题：</label>
+								<div class="col-sm-8">
+									<input id="title" name="title" th:value="${alipayZhimaCredit.title}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">内容：</label>
+								<div class="col-sm-8">
+									<input id="content" name="content" th:value="${alipayZhimaCredit.content}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">芝麻信用分：</label>
+								<div class="col-sm-8">
+									<input id="score" name="score" th:value="${alipayZhimaCredit.score}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型,芝麻信用状态 认证中、已驳回、已认证 对应芝麻信用表状态：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" th:value="${alipayZhimaCredit.status}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${alipayZhimaCredit.remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" th:value="${alipayZhimaCredit.createDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="updateDate" name="updateDate" th:value="${alipayZhimaCredit.updateDate}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/member/alipayZhimaCredit/edit.js">
+	</script>
+</body>
+</html>

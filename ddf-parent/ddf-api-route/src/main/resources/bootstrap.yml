@@ -1,0 +1,71 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-route
+        
+server:
+  port: 8001
+
+eureka:
+  client:
+    service-url: 
+       defaultZone: http://localhost:8000/eureka/
+    register-with-eureka: false   
+  instance:
+    hostname: ddf-api-route
+    
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000 
+       
+zuul:
+  routes:
+    studentApi: 
+      path: /stu/newapi/**
+      service-id: service-student
+    oldStudentApi:
+      path: /stu/oldapi/**
+      service-id: service-student-old
+    fileApi:  
+      path: /file/**
+      service-id: service-file
+      sensitive-headers: Cookie,Set-Cookie  
+    memberApi:  
+      path: /member/**
+      service-id: service-member
+      sensitive-headers: Cookie,Set-Cookie
+    messageApi:  
+      path: /message/**
+      service-id: service-message
+      sensitive-headers: Cookie,Set-Cookie  
+    commonApi:
+      path: /common/**
+      service-id: service-common
+      sensitive-headers: Cookie,Set-Cookie
+    smsApi:
+      path: /sms/**
+      service-id: service-sms
+      sensitive-headers: Cookie,Set-Cookie
+    dicApi:
+      path: /dic/**
+      service-id: service-dic
+      sensitive-headers: Cookie,Set-Cookie
+    rentApi:
+      path: /rent/**
+      service-id: service-rent
+      sensitive-headers: Cookie,Set-Cookie
+    rentMatchApi:
+      path: /rentMatch/**
+      service-id: service-rent-match
+      sensitive-headers: Cookie,Set-Cookie
+    capitalApi:
+      path: /capital/**
+      service-id: service-capital
+      sensitive-headers: Cookie,Set-Cookie     
+      

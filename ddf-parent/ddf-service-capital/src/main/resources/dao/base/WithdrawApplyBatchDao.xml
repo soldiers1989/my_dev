@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.WithdrawApplyBatchDao">
+    
+	<sql id="withdrawApplyBatchColumns">
+		a.id AS "id",
+		a.alipay_batch_no AS "alipayBatchNo",
+		a.amount AS "amount",
+		a.batch_name AS "batchName",
+		a.status AS "status",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="WithdrawApplyBatch">
+		SELECT 
+			<include refid="withdrawApplyBatchColumns"/>
+		FROM withdraw_apply_batch a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO withdraw_apply_batch(
+			id,
+			alipay_batch_no,
+			amount,
+			batch_name,
+			status,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{alipayBatchNo},
+			#{amount},
+			#{batchName},
+			#{status},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE withdraw_apply_batch SET 	
+			id = #{id},
+			alipay_batch_no = #{alipayBatchNo},
+			amount = #{amount},
+			batch_name = #{batchName},
+			status = #{status},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM withdraw_apply_batch
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

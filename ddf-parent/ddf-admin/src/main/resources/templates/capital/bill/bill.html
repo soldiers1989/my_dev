@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input type="text" class=" form-control" id="startDate" placeholder="结束日期"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input type="text" class=" form-control" id="startDate" placeholder="开始日期"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+						</div>
+						<div class="columns pull-right col-md-2">
+							<select data-placeholder="交易状态" class="form-control chosen-select"
+								tabindex="2" style="width: 100%" id="status">
+								<option value="">请选择</option>
+								<option th:each="status:${statusArray}" th:text="${status.explain}" th:value="${status}" />
+							</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select data-placeholder="交易类型" class="form-control chosen-select"
+								tabindex="2" style="width: 100%" id="billOrderType">
+								<option value="">请选择</option>
+								<option th:each="billOrderType:${billOrderTypeArray}" th:text="${billOrderType.explain}" th:value="${billOrderType}" />
+							</select>
+						</div>
+						
+						
+						
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/capital/bill/bill.js"></script>
+</body>
+</html>

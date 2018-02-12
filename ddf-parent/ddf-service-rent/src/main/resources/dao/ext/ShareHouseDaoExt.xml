@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ShareHouseDao">
+    <sql id="shareHouseConditions">
+    	<where>
+			
+			<if test=" shareHouse!= null ">
+				<if test="shareHouse.id != null and shareHouse.id != ''">
+					AND a.id = #{shareHouse.id}
+				</if>
+				<if test="shareHouse.userId != null and shareHouse.userId != ''">
+					AND a.user_id = #{shareHouse.userId}
+				</if>
+				<if test="shareHouse.assistantId != null and shareHouse.assistantId != ''">
+					AND a.assistant_id = #{shareHouse.assistantId}
+				</if>
+				<if test="shareHouse.lodgerInfo != null and shareHouse.lodgerInfo != ''">
+					AND a.lodger_info = #{shareHouse.lodgerInfo}
+				</if>
+				<if test="shareHouse.ownType != null">
+					AND a.own_type = #{shareHouse.ownType}
+				</if>
+				<if test="shareHouse.provinceId != null and shareHouse.provinceId != ''">
+					AND a.province_id = #{shareHouse.provinceId}
+				</if>
+				<if test="shareHouse.cityId != null and shareHouse.cityId != ''">
+					AND a.city_id = #{shareHouse.cityId}
+				</if>
+				<if test="shareHouse.districtId != null and shareHouse.districtId != ''">
+					AND a.district_id = #{shareHouse.districtId}
+				</if>
+				<if test="shareHouse.circleId != null and shareHouse.circleId != ''">
+					AND a.circle_id = #{shareHouse.circleId}
+				</if>
+				<if test="shareHouse.xiaoquName != null and shareHouse.xiaoquName != ''">
+					AND a.xiaoqu_name = #{shareHouse.xiaoquName}
+				</if>
+				<if test="shareHouse.xiaoquId != null and shareHouse.xiaoquId != ''">
+					AND a.xiaoqu_id = #{shareHouse.xiaoquId}
+				</if>
+				<if test="shareHouse.xiaoquAddress != null and shareHouse.xiaoquAddress != ''">
+					AND a.xiaoqu_address = #{shareHouse.xiaoquAddress}
+				</if>
+				<if test="shareHouse.coverImg != null and shareHouse.coverImg != ''">
+					AND a.cover_img = #{shareHouse.coverImg}
+				</if>
+				<if test="shareHouse.detailImgs != null and shareHouse.detailImgs != ''">
+					AND a.detail_imgs = #{shareHouse.detailImgs}
+				</if>
+				<if test="shareHouse.loudonghao != null and shareHouse.loudonghao != ''">
+					AND a.loudonghao = #{shareHouse.loudonghao}
+				</if>
+				<if test="shareHouse.danyuanhao != null and shareHouse.danyuanhao != ''">
+					AND a.danyuanhao = #{shareHouse.danyuanhao}
+				</if>
+				<if test="shareHouse.shihao != null and shareHouse.shihao != ''">
+					AND a.shihao = #{shareHouse.shihao}
+				</if>
+				<if test="shareHouse.totalFloor != null">
+					AND a.total_floor = #{shareHouse.totalFloor}
+				</if>
+				<if test="shareHouse.currentFloor != null">
+					AND a.current_floor = #{shareHouse.currentFloor}
+				</if>
+				<if test="shareHouse.apartmentNum != null">
+					AND a.apartment_num = #{shareHouse.apartmentNum}
+				</if>
+				<if test="shareHouse.publicFacilitys != null and shareHouse.publicFacilitys != ''">
+					AND a.public_facilitys = #{shareHouse.publicFacilitys}
+				</if>
+				<if test="shareHouse.status != null">
+					AND a.status = #{shareHouse.status}
+				</if>
+				<if test="shareHouse.reviewSuccessDate != null">
+					AND a.review_success_date = #{shareHouse.reviewSuccessDate}
+				</if>
+				<if test="shareHouse.hideFlag != null">
+					AND a.hide_flag = #{shareHouse.hideFlag}
+				</if>
+				<if test="shareHouse.remark != null and shareHouse.remark != ''">
+					AND a.remark = #{shareHouse.remark}
+				</if>
+				<if test="shareHouse.createDate != null">
+					AND a.create_date = #{shareHouse.createDate}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+				<if test="shareHouse.updateDate != null">
+					AND a.update_date = #{shareHouse.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ShareHouseVo">
+   		SELECT
+			<include refid="shareHouseColumns"/>
+		FROM share_house a
+		<include refid="shareHouseConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM share_house a
+		<include refid="shareHouseConditions"/>
+   </select>
+   
+    <update id="remove4id">
+		UPDATE share_house SET 	
+			hide_flag = 1
+		WHERE id = #{id}
+	</update> 
+</mapper>

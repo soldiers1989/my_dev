@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.dic.dao.MetroStationDao">
+    
+	<sql id="metroStationColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.metro_line_id AS "metroLineId",
+		a.sort AS "sort",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="MetroStation">
+		SELECT 
+			<include refid="metroStationColumns"/>
+		FROM metro_station a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO metro_station(
+			id,
+			name,
+			metro_line_id,
+			sort,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{name},
+			#{metroLineId},
+			#{sort},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE metro_station SET 	
+			name = #{name},
+			metro_line_id = #{metroLineId},
+			sort = #{sort},
+			remark = #{remark},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM metro_station
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

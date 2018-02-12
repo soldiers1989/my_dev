@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.MessageTaskDao">
+    <sql id="messageTaskConditions">
+    	<where>
+			
+			<if test=" messageTask!= null ">
+				<if test="messageTask.id != null and messageTask.id != ''">
+					AND a.id = #{messageTask.id}
+				</if>
+				<if test="messageTask.bizType != null and messageTask.bizType != ''">
+					AND a.biz_type = #{messageTask.bizType}
+				</if>
+				<if test="messageTask.dataId != null and messageTask.dataId != ''">
+					AND a.data_id = #{messageTask.dataId}
+				</if>
+				<if test="messageTask.status != null and messageTask.status != ''">
+					AND a.status = #{messageTask.status}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MessageTaskVo">
+   		SELECT
+			<include refid="messageTaskColumns"/>
+		FROM message_task a
+		<include refid="messageTaskConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM message_task a
+		<include refid="messageTaskConditions"/>
+   </select>
+   
+   <select id="findByBizTypeLimit1" resultType="MessageTask">
+   		SELECT
+			<include refid="messageTaskColumns"/>
+		FROM message_task a
+		<where>
+			a.status = 'WAIT'
+			AND a.biz_type = #{bizType}
+		</where>
+		order by a.create_date
+		limit 1
+   </select>
+</mapper>

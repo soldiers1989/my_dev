@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.member.dao.AlipayZhimaCreditDao">
+    <sql id="alipayZhimaCreditConditions">
+    	<where>
+			
+			<if test=" alipayZhimaCredit!= null ">
+				<if test="alipayZhimaCredit.id != null and alipayZhimaCredit.id != ''">
+					AND a.id = #{alipayZhimaCredit.id}
+				</if>
+				<if test="alipayZhimaCredit.userId != null and alipayZhimaCredit.userId != ''">
+					AND a.user_id = #{alipayZhimaCredit.userId}
+				</if>
+				<if test="alipayZhimaCredit.type != null and alipayZhimaCredit.type != ''">
+					AND a.type = #{alipayZhimaCredit.type}
+				</if>
+				<if test="alipayZhimaCredit.img != null and alipayZhimaCredit.img != ''">
+					AND a.img = #{alipayZhimaCredit.img}
+				</if>
+				<if test="alipayZhimaCredit.title != null and alipayZhimaCredit.title != ''">
+					AND a.title = #{alipayZhimaCredit.title}
+				</if>
+				<if test="alipayZhimaCredit.content != null and alipayZhimaCredit.content != ''">
+					AND a.content = #{alipayZhimaCredit.content}
+				</if>
+				<if test="alipayZhimaCredit.score != null">
+					AND a.score = #{alipayZhimaCredit.score}
+				</if>
+				<if test="alipayZhimaCredit.status != null">
+					AND a.status = #{alipayZhimaCredit.status}
+				</if>
+				<if test="alipayZhimaCredit.remark != null and alipayZhimaCredit.remark != ''">
+					AND a.remark = #{alipayZhimaCredit.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="AlipayZhimaCreditVo">
+   		SELECT
+			<include refid="alipayZhimaCreditColumns"/>
+		FROM alipay_zhima_credit a
+		<include refid="alipayZhimaCreditConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM alipay_zhima_credit a
+		<include refid="alipayZhimaCreditConditions"/>
+   </select>
+</mapper>

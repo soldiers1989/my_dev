@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>dao</name>
+	<filePath>${packageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}Dao.java</fileName>
+	<content><![CDATA[
+
+package ${basePackageName}.${bizPackageName}.dao;
+
+import com.ddf.component.mybatis.api.CrudDao;
+import ${basePackageName}.entity.${bizPackageName}.query.${ClassName}Query;
+import ${basePackageName}.entity.${bizPackageName}.vo.${ClassName}Vo;
+import ${basePackageName}.entity.${bizPackageName}.dto.${ClassName};
+
+/**
+ * ${functionName}DAO接口
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+public interface ${ClassName}Dao extends CrudDao<${ClassName},${ClassName}Vo,${ClassName}Query> {
+	
+}]]>
+	</content>
+</template>

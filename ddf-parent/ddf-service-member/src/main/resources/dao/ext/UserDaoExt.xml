@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.member.dao.UserDao">
+    <sql id="userConditions">
+    	<where>
+			
+			<if test=" user!= null ">
+				<if test="user.id != null and user.id != ''">
+					AND a.id = #{user.id}
+				</if>
+				<if test="user.userName != null and user.userName != ''">
+					AND a.user_name = #{user.userName}
+				</if>
+				<if test="user.password != null and user.password != ''">
+					AND a.password = #{user.password}
+				</if>
+				<if test="user.payPassword != null and user.payPassword != ''">
+					AND a.pay_password = #{user.payPassword}
+				</if>
+				<if test="user.mobile != null and user.mobile != ''">
+					AND a.mobile = #{user.mobile}
+				</if>
+				<if test="user.headImg != null and user.headImg != ''">
+					AND a.head_img = #{user.headImg}
+				</if>
+				<if test="user.nickName != null and user.nickName != ''">
+					AND a.nick_name = #{user.nickName}
+				</if>
+				<if test="user.sex != null">
+					AND a.sex = #{user.sex}
+				</if>
+				<if test="user.birthday != null">
+					AND a.birthday = #{user.birthday}
+				</if>
+				<if test="user.industry != null and user.industry != ''">
+					AND a.industry = #{user.industry}
+				</if>
+				<if test="user.personalitySign != null and user.personalitySign != ''">
+					AND a.personality_sign = #{user.personalitySign}
+				</if>
+				<if test="user.personas != null and user.personas != ''">
+					AND a.personas = #{user.personas}
+				</if>
+				<if test="user.inviter != null and user.inviter != ''">
+					AND a.inviter = #{user.inviter}
+				</if>
+				<if test="user.zhimaCreditFlag != null">
+					AND a.zhima_credit_flag = #{user.zhimaCreditFlag}
+				</if>
+				<if test="user.businessType != null">
+					AND a.business_type = #{user.businessType}
+				</if>
+				<if test="user.realNameFlag != null">
+					AND a.real_name_flag = #{user.realNameFlag}
+				</if>
+				<if test="user.alipayFlay != null">
+					AND a.alipay_flay = #{user.alipayFlay}
+				</if>
+				<if test="user.bondFlag != null">
+					AND a.bond_flag = #{user.bondFlag}
+				</if>
+				<if test="user.answerFlag != null">
+					AND a.answer_flag = #{user.answerFlag}
+				</if>
+				<if test="user.status != null">
+					AND a.status = #{user.status}
+				</if>
+				<if test="user.remark != null and user.remark != ''">
+					AND a.remark = #{user.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="UserVo">
+   		SELECT
+			<include refid="userColumns"/>
+		FROM user a
+		<include refid="userConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM user a
+		<include refid="userConditions"/>
+   </select>
+   
+   <select id="query" resultType="UserVo">
+   		SELECT
+			<include refid="userColumns"/>
+		FROM user a
+		<include refid="userConditions"/>
+   </select>
+   
+    <select id="checkUserName" resultType="int">
+   		SELECT
+			count(1)
+		FROM user a
+		<where>
+			a.user_name = #{user.userName} or a.mobile = #{user.mobile}
+		</where>
+   </select>
+   
+   <update id="updatePassword">
+		UPDATE user SET 	
+			password = #{password},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	 <update id="updatePayPassword">
+		UPDATE user SET 	
+			pay_password = #{payPassword},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="updateRealNameFlag">
+		UPDATE user SET 	
+			real_name_flag = #{realNameFlag},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateZhimaCreditFlag">
+		UPDATE user SET 	
+			zhima_credit_flag = #{zhimaCreditFlag},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateBondFlag">
+		UPDATE user SET 	
+			bond_flag = #{bondFlag},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateAnswerFlag">
+		UPDATE user SET 	
+			answer_flag = #{answerFlag},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateAlipayFlay">
+		UPDATE user SET 	
+			alipay_flay = #{alipayFlay},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="modifyInfo">
+		UPDATE user SET 	
+			head_img = #{headImg},
+			nick_name = #{nickName},
+			sex = #{sex},
+			industry = #{industry},
+			company = #{company},
+			profession = #{profession},
+			personality_sign = #{personalitySign},
+			business_type = #{businessType},
+			remark = #{remark},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="modifyMobile">
+		UPDATE user SET 	
+			user_name = #{userName},
+			mobile = #{mobile},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

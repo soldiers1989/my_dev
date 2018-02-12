@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.DepositOrderDao">
+    
+	<sql id="depositOrderColumns">
+		a.id AS "id",
+		a.landlord_id AS "landlordId",
+		a.landlord_name AS "landlordName",
+		a.landlord_mobile AS "landlordMobile",
+		a.lodger_id AS "lodgerId",
+		a.lodger_name AS "lodgerName",
+		a.lodger_mobile AS "lodgerMobile",
+		a.house_deposit_contract_id AS "houseDepositContractId",
+		a.house_id AS "houseId",
+		a.no AS "no",
+		a.amount AS "amount",
+		a.alipay_trade_no AS "alipayTradeNo",
+		a.status AS "status",
+		a.check_in_date AS "checkInDate",
+		a.check_out_date AS "checkOutDate",
+		a.rent_type AS "rentType",
+		a.rent_amount AS "rentAmount",
+		a.pay_type AS "payType",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="DepositOrder">
+		SELECT 
+			<include refid="depositOrderColumns"/>
+		FROM deposit_order a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO deposit_order(
+			id,
+			landlord_id,
+			landlord_name,
+			landlord_mobile,
+			lodger_id,
+			lodger_name,
+			lodger_mobile,
+			house_deposit_contract_id,
+			house_id,
+			no,
+			amount,
+			alipay_trade_no,
+			status,
+			check_in_date,
+			check_out_date,
+			rent_type,
+			rent_amount,
+			pay_type,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{landlordId},
+			#{landlordName},
+			#{landlordMobile},
+			#{lodgerId},
+			#{lodgerName},
+			#{lodgerMobile},
+			#{houseDepositContractId},
+			#{houseId},
+			#{no},
+			#{amount},
+			#{alipayTradeNo},
+			#{status},
+			#{checkInDate},
+			#{checkOutDate},
+			#{rentType},
+			#{rentAmount},
+			#{payType},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE deposit_order SET 	
+			id = #{id},
+			landlord_id = #{landlordId},
+			landlord_name = #{landlordName},
+			landlord_mobile = #{landlordMobile},
+			lodger_id = #{lodgerId},
+			lodger_name = #{lodgerName},
+			lodger_mobile = #{lodgerMobile},
+			house_deposit_contract_id = #{houseDepositContractId},
+			house_id = #{houseId},
+			no = #{no},
+			amount = #{amount},
+			alipay_trade_no = #{alipayTradeNo},
+			status = #{status},
+			check_in_date = #{checkInDate},
+			check_out_date = #{checkOutDate},
+			rent_type = #{rentType},
+			rent_amount = #{rentAmount},
+			pay_type = #{payType},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM deposit_order
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${sysMessageAdmin.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">创建人ID：</label>
+								<div class="col-sm-8">
+									<input id="userId" name="userId" th:value="${sysMessageAdmin.userId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型,业务类型：</label>
+								<div class="col-sm-8">
+									<input id="type" name="type" th:value="${sysMessageAdmin.type}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">图片：</label>
+								<div class="col-sm-8">
+									<input id="img" name="img" th:value="${sysMessageAdmin.img}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">标题：</label>
+								<div class="col-sm-8">
+									<input id="title" name="title" th:value="${sysMessageAdmin.title}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">内容：</label>
+								<div class="col-sm-8">
+									<input id="content" name="content" th:value="${sysMessageAdmin.content}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">消息链接：</label>
+								<div class="col-sm-8">
+									<input id="url" name="url" th:value="${sysMessageAdmin.url}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型,未审核，审核，已发送：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" th:value="${sysMessageAdmin.status}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型,指定人，全部：</label>
+								<div class="col-sm-8">
+									<input id="sendType" name="sendType" th:value="${sysMessageAdmin.sendType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">当为指定人时，为指定人的ID集合：</label>
+								<div class="col-sm-8">
+									<input id="sendUserIds" name="sendUserIds" th:value="${sysMessageAdmin.sendUserIds}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${sysMessageAdmin.remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" th:value="${sysMessageAdmin.createDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="updateDate" name="updateDate" th:value="${sysMessageAdmin.updateDate}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/message/sysMessageAdmin/edit.js">
+	</script>
+</body>
+</html>

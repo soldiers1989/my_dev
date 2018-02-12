@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="rent:shareApartment:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="rent:shareApartment:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<input id="id" placeholder="房间ID" type="text" class="form-control" >
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<input id="houseId" placeholder="房源ID" type="text" class="form-control" >
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<input id="name" placeholder="房间名" type="text" class="form-control" >
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="zhuangxiu" data-placeholder="装修" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择装修状态</option>
+								<option th:each="dict:${ShareApartmentZhuangxiu}" th:text="${dict.explain}" th:value="${dict}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="chaoxiang" data-placeholder="朝向" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择朝向状态</option>
+								<option th:each="dict:${ShareApartmentChaoxiang}" th:text="${dict.explain}" th:value="${dict}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="bedroomType" data-placeholder="卧室" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择卧室状态</option>
+								<option th:each="dict:${ShareApartmentBedroomType}" th:text="${dict.explain}" th:value="${dict}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="matchStatus" data-placeholder="招租" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择招租状态</option>
+								<option th:each="dict:${ShareApartmentMatchStatus}" th:text="${dict.explain}" th:value="${dict}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="status" data-placeholder="审核" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择审核状态</option>
+								<option th:each="dict:${ShareApartmentStatus}" th:text="${dict.explain}" th:value="${dict}" />
+							</select>
+						</div>
+						
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="endCreateDate" placeholder="创建结束日期"  type="text" class=" form-control laydate-icon" 
+								           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="startCreateDate" placeholder="创建开始日期"  type="text" class=" form-control laydate-icon" 
+								           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+						</div>
+						
+						<div class="columns pull-right col-md-2 ">
+							<select id="hideFlag" data-placeholder="是否删除" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+								<option value="">选择删除状态</option>
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+						</div>
+						
+						
+						
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="rent:shareApartment:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="rent:shareApartment:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="rent:shareApartment:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/rent/shareApartment/shareApartment.js"></script>
+</body>
+</html>

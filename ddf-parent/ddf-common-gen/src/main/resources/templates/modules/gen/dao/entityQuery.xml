@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>entityQuery</name>
+	<filePath>${packageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}Query.java</fileName>
+	<content><![CDATA[
+
+package ${basePackageName}.entity.${bizPackageName}.query;
+
+import com.ddf.entity.base.query.Query;
+import ${basePackageName}.entity.${bizPackageName}.dto.${ClassName};
+
+/**
+ * ${functionName}EntityQuery
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+public class ${ClassName}Query extends Query {
+
+	private static final long serialVersionUID = 1L;
+
+	public ${ClassName}Query(){
+		this.${className} = new ${ClassName}();
+	}
+	
+	private ${ClassName} ${className};
+
+	public ${ClassName} get${ClassName}() {
+		return ${className};
+	}
+
+	public void set${ClassName}(${ClassName} ${className}) {
+		this.${className} = ${className};
+	}
+
+}]]>
+	</content>
+</template>

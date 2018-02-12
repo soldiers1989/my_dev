@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.dic.dao.XiaoquDao">
+	<sql id="xiaoquConditions">
+		<where>
+
+			<if test=" xiaoqu!= null ">
+				<if test="xiaoqu.id != null and xiaoqu.id != ''">
+					AND a.id = #{xiaoqu.id}
+				</if>
+				<if test="xiaoqu.provinceId != null and xiaoqu.provinceId != ''">
+					AND a.province_id = #{xiaoqu.provinceId}
+				</if>
+				<if test="xiaoqu.cityId != null and xiaoqu.cityId != ''">
+					AND a.city_id = #{xiaoqu.cityId}
+				</if>
+				<if test="xiaoqu.districtId != null and xiaoqu.districtId != ''">
+					AND a.district_id = #{xiaoqu.districtId}
+				</if>
+				<if test="xiaoqu.circleId != null and xiaoqu.circleId != ''">
+					AND a.circle_id = #{xiaoqu.circleId}
+				</if>
+				<if test="xiaoqu.name != null and xiaoqu.name != ''">
+					AND a.name = #{xiaoqu.name}
+				</if>
+				<if test="xiaoqu.address != null and xiaoqu.address != ''">
+					AND a.address = #{xiaoqu.address}
+				</if>
+				<if test="xiaoqu.opinionLevel != null">
+					AND a.opinion_level = #{xiaoqu.opinionLevel}
+				</if>
+				<if test="xiaoqu.opinionContent != null and xiaoqu.opinionContent != ''">
+					AND a.opinion_content = #{xiaoqu.opinionContent}
+				</if>
+				<if test="xiaoqu.lng != null and xiaoqu.lng != ''">
+					AND a.lng = #{xiaoqu.lng}
+				</if>
+				<if test="xiaoqu.lat != null and xiaoqu.lat != ''">
+					AND a.lat = #{xiaoqu.lat}
+				</if>
+				<if test="xiaoqu.imgs != null and xiaoqu.imgs != ''">
+					AND a.imgs = #{xiaoqu.imgs}
+				</if>
+				<if test="xiaoqu.buildAge != null">
+					AND a.build_age = #{xiaoqu.buildAge}
+				</if>
+				<if test="xiaoqu.loopLine != null">
+					AND a.loop_line = #{xiaoqu.loopLine}
+				</if>
+				<if test="xiaoqu.propertyType != null and xiaoqu.propertyType != ''">
+					AND a.property_type = #{xiaoqu.propertyType}
+				</if>
+				<if test="xiaoqu.propertyCompany != null and xiaoqu.propertyCompany != ''">
+					AND a.property_company = #{xiaoqu.propertyCompany}
+				</if>
+				<if test="xiaoqu.propertyAmount != null">
+					AND a.property_amount = #{xiaoqu.propertyAmount}
+				</if>
+				<if test="xiaoqu.developers != null and xiaoqu.developers != ''">
+					AND a.developers = #{xiaoqu.developers}
+				</if>
+				<if test="xiaoqu.displayState != null">
+					AND a.display_state = #{xiaoqu.displayState}
+				</if>
+				<if test="xiaoqu.remark != null and xiaoqu.remark != ''">
+					AND a.remark = #{xiaoqu.remark}
+				</if>
+				<if test="xiaoqu.createDate != null">
+					AND a.create_date = #{xiaoqu.createDate}
+				</if>
+				<if test="xiaoqu.updateDate != null">
+					AND a.update_date = #{xiaoqu.updateDate}
+				</if>
+			</if>
+		</where>
+	</sql>
+	<sql id="xiaoquLikeConditions">
+		<where>
+			<if test=" xiaoqu!= null ">
+
+				<if test="xiaoqu.name != null and xiaoqu.name != ''">
+					AND a.name LIKE concat('%',#{xiaoqu.name},'%')
+				</if>
+				<if test="xiaoqu.address != null and xiaoqu.address != ''">
+					AND a.address LIKE concat('%',#{xiaoqu.address},'%')
+				</if>
+				<if test="xiaoqu.displayState != null">
+					AND a.display_state = #{xiaoqu.displayState}
+				</if>
+
+			</if>
+		</where>
+	</sql>
+   <select id="findList" resultType="XiaoquVo">
+   		SELECT
+			<include refid="xiaoquColumns"/>
+		FROM xiaoqu a
+		<include refid="xiaoquConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM xiaoqu a
+		<include refid="xiaoquConditions"/>
+   </select>
+	<select id="findList4like" resultType="XiaoquVo">
+		SELECT
+		<include refid="xiaoquColumns"/>
+		FROM xiaoqu a
+		<include refid="xiaoquLikeConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+	</select>
+	<select id="findCount4like" resultType="java.lang.Long">
+		SELECT
+		COUNT(1)
+		FROM xiaoqu a
+		<include refid="xiaoquLikeConditions"/>
+	</select>
+	<select id="findXiaoquByLngLat" resultType="XiaoquVo">
+		SELECT <include refid="xiaoquColumns"/>,
+		ROUND(6378.138*2*ASIN(SQRT(POW(SIN((#{xiaoqu.lat}*PI()/180-a.lat*PI()/180)/2),2)+COS(#{xiaoqu.lat}*PI()/180)*COS(a.lat*PI()/180)*POW(SIN((#{xiaoqu.lng}*PI()/180-a.lng*PI()/180)/2),2))),2) AS "distance"
+
+		FROM xiaoqu a
+		having distance <![CDATA[<]]> 3000
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+	</select>
+</mapper>

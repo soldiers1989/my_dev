@@ -1,0 +1,55 @@
+一，项目工具类，由单个类实现功能，直接通过静态方法提供访问
+ddf-common-util
+二，代码生成工具
+ddf-common-gen
+三，实体类
+ddf-common-entity
+四，组件类，由一组类实现功能，提供API类，通过jar包引用访问。
+ddf-common-component
+
+五，基础API，和业务系统无关的API，通过httpresetful访问
+ddf-service-file 	文件接口
+ddf-service-sms	短信消息接口
+ddf-service-cache		缓存接口
+ddf-service-common	一些简单的接口，如果复杂度上升，则提取出来形成新的基础api项目
+
+六，业务系统，提供业务API，通过httpresetful访问
+ddf-service-dic	字典接口，赵云斌
+ddf-service-message	消息接口，花姐
+ddf-service-member	会员接口，花姐
+ddf-service-rent		租房接口，许冠超
+ddf-service-rent-match		租房匹配接口，
+ddf-service-capital			资金接口，
+
+七，路由项目，通过地址切换service-api服务，验证签名
+ddf-api-route
+
+八，配置文件管理系统
+ddf-config-server		配置文件服务提供者
+ddf-config			配置文件。开发，测试，生产版本。上传git并确定dev,master分支
+
+九，服务注册中心
+ddf-service-server		spring-clound的服务注册中心
+
+
+========================发布与端口=========================
+#spring cloud管理项目：8000开头
+ddf-service-server 	服务注册中心    8000
+ddf-api-route		路由项目		8001
+ddf-config-server	配置中心		8002
+
+
+#基础服务:10000开头
+ddf-service-common 	基础工具               10001
+ddf-service-cache  	缓存                   10002
+ddf-service-file   	文件系统               10003
+ddf-service-dic  	字典系统​               10004​
+ddf-service-sms   	短信服务               10005​
+
+
+#业务服务：10100开头​
+ddf-service-member 		会员			10100
+ddf-service-message 	消息			10101
+ddf-service-rent  		租房			10102
+ddf-service-rent-match  租房匹配		10103
+ddf-service-capital  	资金系统		10104

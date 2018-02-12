@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ddf-service-member
+  cloud:
+    config:
+      label: master
+      profile: test
+      uri: http://localhost:8081/
+server:
+  port: 8082

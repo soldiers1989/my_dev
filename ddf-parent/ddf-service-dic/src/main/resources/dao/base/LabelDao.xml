@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.dic.dao.LabelDao">
+    
+	<sql id="labelColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.type AS "type",
+		a.sort AS "sort",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="Label">
+		SELECT 
+			<include refid="labelColumns"/>
+		FROM label a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO label(
+			id,
+			name,
+			type,
+			sort,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{name},
+			#{type},
+			#{sort},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE label SET 	
+			id = #{id},
+			name = #{name},
+			type = #{type},
+			sort = #{sort},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM label
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

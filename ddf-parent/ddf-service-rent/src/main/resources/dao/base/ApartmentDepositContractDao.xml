@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ApartmentDepositContractDao">
+    
+	<sql id="apartmentDepositContractColumns">
+		a.id AS "id",
+		a.rent_amount AS "rentAmount",
+		a.deposit_amout AS "depositAmout",
+		a.status AS "status",
+		a.apartment_id AS "apartmentId",
+		a.apartment_type AS "apartmentType",
+		a.rent_type AS "rentType",
+		a.pay_type AS "payType",
+		a.check_in_date AS "checkInDate",
+		a.check_out_date AS "checkOutDate",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="ApartmentDepositContract">
+		SELECT 
+			<include refid="apartmentDepositContractColumns"/>
+		FROM apartment_deposit_contract a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO apartment_deposit_contract(
+			id,
+			rent_amount,
+			deposit_amout,
+			status,
+			apartment_id,
+			apartment_type,
+			rent_type,
+			pay_type,
+			check_in_date,
+			check_out_date,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{rentAmount},
+			#{depositAmout},
+			#{status},
+			#{apartmentId},
+			#{apartmentType},
+			#{rentType},
+			#{payType},
+			#{checkInDate},
+			#{checkOutDate},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE apartment_deposit_contract SET 	
+			id = #{id},
+			rent_amount = #{rentAmount},
+			deposit_amout = #{depositAmout},
+			status = #{status},
+			apartment_id = #{apartmentId},
+			apartment_type = #{apartmentType},
+			rent_type = #{rentType},
+			pay_type = #{payType},
+			check_in_date = #{checkInDate},
+			check_out_date = #{checkOutDate},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM apartment_deposit_contract
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">租客ID：</label>
+								<div class="col-sm-8">
+									<input id="lodgerId" name="lodgerId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">位置ID：</label>
+								<div class="col-sm-8">
+									<input id="areaIds" name="areaIds" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquIds" name="xiaoquIds" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">地铁线ID：</label>
+								<div class="col-sm-8">
+									<input id="metroLineIds" name="metroLineIds" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">地铁站ID：</label>
+								<div class="col-sm-8">
+									<input id="metorStationIds" name="metorStationIds" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最小金额：</label>
+								<div class="col-sm-8">
+									<input id="minAmout" name="minAmout" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最大金额：</label>
+								<div class="col-sm-8">
+									<input id="maxAmout" name="maxAmout" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">户型：</label>
+								<div class="col-sm-8">
+									<input id="huxing" name="huxing" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房源标签：</label>
+								<div class="col-sm-8">
+									<input id="houseLabelIds" name="houseLabelIds" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，整租whole_rent，合租share_rent：</label>
+								<div class="col-sm-8">
+									<input id="apartmentType" name="apartmentType" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，匹配状态(open,close)：</label>
+								<div class="col-sm-8">
+									<input id="matchStatus" name="matchStatus" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">隐藏状态(0-正常，1-隐藏)：</label>
+								<div class="col-sm-8">
+									<input id="hideFlag" name="hideFlag" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="updateDate" name="updateDate" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/rent/rentDemand/add.js">
+	</script>
+</body>
+</html>

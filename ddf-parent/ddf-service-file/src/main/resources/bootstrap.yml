@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-file
+  cloud:
+    config:
+      label: dev
+      profile: dev
+      discovery.enabled: true
+      discovery.serviceId: config-server
+              
+server:
+  port: 10003
+
+eureka:
+  client:
+    service-url: 
+       defaultZone: http://localhost:8000/eureka/
+  instance:
+    hostname: ddf-service-file
+       
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000     

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${apartmentMatchRecord.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">需求ID：</label>
+								<div class="col-sm-8">
+									<input id="rentDemandId" name="rentDemandId" th:value="${apartmentMatchRecord.rentDemandId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房东id：</label>
+								<div class="col-sm-8">
+									<input id="landlordId" name="landlordId" th:value="${apartmentMatchRecord.landlordId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">需求匹配到的房源id：</label>
+								<div class="col-sm-8">
+									<input id="houseId" name="houseId" th:value="${apartmentMatchRecord.houseId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">省：</label>
+								<div class="col-sm-8">
+									<input id="provinceId" name="provinceId" th:value="${apartmentMatchRecord.provinceId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">市：</label>
+								<div class="col-sm-8">
+									<input id="cityId" name="cityId" th:value="${apartmentMatchRecord.cityId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">大区：</label>
+								<div class="col-sm-8">
+									<input id="districtId" name="districtId" th:value="${apartmentMatchRecord.districtId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">板块：</label>
+								<div class="col-sm-8">
+									<input id="circleId" name="circleId" th:value="${apartmentMatchRecord.circleId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区名：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquName" name="xiaoquName" th:value="${apartmentMatchRecord.xiaoquName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区ID：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquId" name="xiaoquId" th:value="${apartmentMatchRecord.xiaoquId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">小区地址：</label>
+								<div class="col-sm-8">
+									<input id="xiaoquAddress" name="xiaoquAddress" th:value="${apartmentMatchRecord.xiaoquAddress}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">楼栋号：</label>
+								<div class="col-sm-8">
+									<input id="loudonghao" name="loudonghao" th:value="${apartmentMatchRecord.loudonghao}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">单元号：</label>
+								<div class="col-sm-8">
+									<input id="danyuanhao" name="danyuanhao" th:value="${apartmentMatchRecord.danyuanhao}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">室号：</label>
+								<div class="col-sm-8">
+									<input id="shihao" name="shihao" th:value="${apartmentMatchRecord.shihao}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">租金：</label>
+								<div class="col-sm-8">
+									<input id="amout" name="amout" th:value="${apartmentMatchRecord.amout}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">室：</label>
+								<div class="col-sm-8">
+									<input id="room" name="room" th:value="${apartmentMatchRecord.room}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">厅：</label>
+								<div class="col-sm-8">
+									<input id="hall" name="hall" th:value="${apartmentMatchRecord.hall}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">卫：</label>
+								<div class="col-sm-8">
+									<input id="bathRoom" name="bathRoom" th:value="${apartmentMatchRecord.bathRoom}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">面积（单位平方）：</label>
+								<div class="col-sm-8">
+									<input id="size" name="size" th:value="${apartmentMatchRecord.size}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">总层数：</label>
+								<div class="col-sm-8">
+									<input id="totalFloor" name="totalFloor" th:value="${apartmentMatchRecord.totalFloor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">当前层数：</label>
+								<div class="col-sm-8">
+									<input id="currentFloor" name="currentFloor" th:value="${apartmentMatchRecord.currentFloor}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，装修(毛坯、简装、精装）：</label>
+								<div class="col-sm-8">
+									<input id="zhuangxiu" name="zhuangxiu" th:value="${apartmentMatchRecord.zhuangxiu}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，朝向（朝东、朝南、朝西、朝北）：</label>
+								<div class="col-sm-8">
+									<input id="chaoxiang" name="chaoxiang" th:value="${apartmentMatchRecord.chaoxiang}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房源标签：</label>
+								<div class="col-sm-8">
+									<input id="houseLabels" name="houseLabels" th:value="${apartmentMatchRecord.houseLabels}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房屋设施：</label>
+								<div class="col-sm-8">
+									<input id="houseFacilityIds" name="houseFacilityIds" th:value="${apartmentMatchRecord.houseFacilityIds}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房产证：</label>
+								<div class="col-sm-8">
+									<input id="houseCertificateImg" name="houseCertificateImg" th:value="${apartmentMatchRecord.houseCertificateImg}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房屋图片：</label>
+								<div class="col-sm-8">
+									<input id="houseImgs" name="houseImgs" th:value="${apartmentMatchRecord.houseImgs}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，匹配状态（open,close)：</label>
+								<div class="col-sm-8">
+									<input id="matchStatus" name="matchStatus" th:value="${apartmentMatchRecord.matchStatus}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">租客要求：</label>
+								<div class="col-sm-8">
+									<input id="lodgerLabels" name="lodgerLabels" th:value="${apartmentMatchRecord.lodgerLabels}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，整租whole_rent，合租share_rent：</label>
+								<div class="col-sm-8">
+									<input id="rentType" name="rentType" th:value="${apartmentMatchRecord.rentType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，房东sublet_no，租客sublet_yes：</label>
+								<div class="col-sm-8">
+									<input id="ownType" name="ownType" th:value="${apartmentMatchRecord.ownType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房源简介：</label>
+								<div class="col-sm-8">
+									<input id="summary" name="summary" th:value="${apartmentMatchRecord.summary}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，待审核wait_review，已审核review_pass，已驳回review_reject：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" th:value="${apartmentMatchRecord.status}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">隐藏状态(1-正常，0-隐藏)：</label>
+								<div class="col-sm-8">
+									<input id="hideFlag" name="hideFlag" th:value="${apartmentMatchRecord.hideFlag}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，定金状态(open,close)：</label>
+								<div class="col-sm-8">
+									<input id="depositStatus" name="depositStatus" th:value="${apartmentMatchRecord.depositStatus}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${apartmentMatchRecord.remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">审核通过时间：</label>
+								<div class="col-sm-8">
+									<input id="reviewSuccessDate" name="reviewSuccessDate" th:value="${apartmentMatchRecord.reviewSuccessDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" th:value="${apartmentMatchRecord.createDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="updateDate" name="updateDate" th:value="${apartmentMatchRecord.updateDate}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房屋设施（字典）：</label>
+								<div class="col-sm-8">
+									<input id="facilitys" name="facilitys" th:value="${apartmentMatchRecord.facilitys}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">封面照片：</label>
+								<div class="col-sm-8">
+									<input id="coverImg" name="coverImg" th:value="${apartmentMatchRecord.coverImg}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">详情照片(最多8张)：</label>
+								<div class="col-sm-8">
+									<input id="detailImgs" name="detailImgs" th:value="${apartmentMatchRecord.detailImgs}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">负责人：</label>
+								<div class="col-sm-8">
+									<input id="assistantId" name="assistantId" th:value="${apartmentMatchRecord.assistantId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">枚举类型，主卧first、次卧second、客卧guest：</label>
+								<div class="col-sm-8">
+									<input id="bedroomType" name="bedroomType" th:value="${apartmentMatchRecord.bedroomType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">独用设施（字典）：</label>
+								<div class="col-sm-8">
+									<input id="privateFacilitys" name="privateFacilitys" th:value="${apartmentMatchRecord.privateFacilitys}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">房间特色（字典）：</label>
+								<div class="col-sm-8">
+									<input id="features" name="features" th:value="${apartmentMatchRecord.features}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/match/apartmentMatchRecord/edit.js">
+	</script>
+</body>
+</html>

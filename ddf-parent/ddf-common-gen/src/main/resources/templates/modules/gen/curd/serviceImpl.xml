@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>serviceImpl</name>
+	<filePath>${packageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}ServiceImpl.java</fileName>
+	<content><![CDATA[
+
+package ${basePackageName}.${bizPackageName}.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.fmzg.chat.facade.service.base.impl.CrudServiceImpl;
+import ${basePackageName}.entity.${bizPackageName}.${ClassName};
+import ${basePackageName}.${bizPackageName}.dao.${ClassName}Dao;
+import ${basePackageName}.${bizPackageName}.service.${ClassName}Service;
+
+/**
+ * ${functionName}Service
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Service
+public class ${ClassName}ServiceImpl extends CrudServiceImpl<${ClassName}Dao, ${ClassName}> implements ${ClassName}Service{
+
+	
+}]]>
+	</content>
+</template>

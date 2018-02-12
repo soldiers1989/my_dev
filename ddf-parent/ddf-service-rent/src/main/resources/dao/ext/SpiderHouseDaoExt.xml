@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.SpiderHouseDao">
+    <sql id="spiderHouseConditions">
+    	<where>
+			
+			<if test=" spiderHouse!= null ">
+				<if test="spiderHouse.id != null and spiderHouse.id != ''">
+					AND a.id = #{spiderHouse.id}
+				</if>
+				<if test="spiderHouse.resouceUrl != null and spiderHouse.resouceUrl != ''">
+					AND a.resouce_url = #{spiderHouse.resouceUrl}
+				</if>
+				<if test="spiderHouse.provinceId != null and spiderHouse.provinceId != ''">
+					AND a.province_id = #{spiderHouse.provinceId}
+				</if>
+				<if test="spiderHouse.cityId != null and spiderHouse.cityId != ''">
+					AND a.city_id = #{spiderHouse.cityId}
+				</if>
+				<if test="spiderHouse.districtId != null and spiderHouse.districtId != ''">
+					AND a.district_id = #{spiderHouse.districtId}
+				</if>
+				<if test="spiderHouse.circleId != null and spiderHouse.circleId != ''">
+					AND a.circle_id = #{spiderHouse.circleId}
+				</if>
+				<if test="spiderHouse.xiaoquId != null and spiderHouse.xiaoquId != ''">
+					AND a.xiaoqu_id = #{spiderHouse.xiaoquId}
+				</if>
+				<if test="spiderHouse.room != null and spiderHouse.room != ''">
+					AND a.room = #{spiderHouse.room}
+				</if>
+				<if test="spiderHouse.amount != null and spiderHouse.amount != ''">
+					AND a.amount = #{spiderHouse.amount}
+				</if>
+				<if test="spiderHouse.remark != null and spiderHouse.remark != ''">
+					AND a.remark = #{spiderHouse.remark}
+				</if>
+				<if test="spiderHouse.createDate != null and spiderHouse.createDate != ''">
+					AND a.create_date = #{spiderHouse.createDate}
+				</if>
+				<if test="spiderHouse.updateDate != null and spiderHouse.updateDate != ''">
+					AND a.update_date = #{spiderHouse.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="SpiderHouseVo">
+   		SELECT
+			<include refid="spiderHouseColumns"/>
+		FROM spider_house a
+		<include refid="spiderHouseConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM spider_house a
+		<include refid="spiderHouseConditions"/>
+   </select>
+	<select id="statsListByCityAndGroupRoomAndDate" resultType="SpiderHouseVo">
+		SELECT
+			room,
+			AVG(amount) AS amount
+		FROM
+			spider_house
+		WHERE city_id=#{cityId} AND
+			create_date BETWEEN #{bDate} AND #{eDate}
+		GROUP BY
+			room
+	</select>
+	<select id="statsListByDistrictAndGroupRoomAndDate" resultType="SpiderHouseVo">
+		SELECT
+		room,
+		AVG(amount) AS amount
+		FROM
+		spider_house
+		WHERE district_id=#{districtId} AND
+		create_date BETWEEN #{bDate} AND #{eDate}
+		GROUP BY
+		room
+	</select>
+	<select id="statsListByCircleAndGroupRoomAndDate" resultType="SpiderHouseVo">
+		SELECT
+		room,
+		AVG(amount) AS amount
+		FROM
+		spider_house
+		WHERE circle_id=#{circleId} AND
+		create_date BETWEEN #{bDate} AND #{eDate}
+		GROUP BY
+		room
+	</select>
+	<select id="statsListByXiaoquAndGroupRoomAndDate" resultType="SpiderHouseVo">
+		SELECT
+		room,
+		AVG(amount) AS amount
+		FROM
+		spider_house
+		WHERE xiaoqu_id=#{xiaoquId} AND
+		create_date BETWEEN #{bDate} AND #{eDate}
+		GROUP BY
+		room
+	</select>
+</mapper>

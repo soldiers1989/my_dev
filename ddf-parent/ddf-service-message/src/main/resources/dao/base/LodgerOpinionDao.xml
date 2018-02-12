@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.LodgerOpinionDao">
+    
+	<sql id="lodgerOpinionColumns">
+		a.id AS "id",
+		a.lodger_id AS "lodgerId",
+		a.landlord_id AS "landlordId",
+		a.lodger_level AS "lodgerLevel",
+		a.lodger_remark AS "lodgerRemark",
+		a.lodger_img AS "lodgerImg",
+		a.lodger_label AS "lodgerLabel",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="LodgerOpinion">
+		SELECT 
+			<include refid="lodgerOpinionColumns"/>
+		FROM lodger_opinion a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO lodger_opinion(
+			id,
+			lodger_id,
+			landlord_id,
+			lodger_level,
+			lodger_remark,
+			lodger_img,
+			lodger_label,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{lodgerId},
+			#{landlordId},
+			#{lodgerLevel},
+			#{lodgerRemark},
+			#{lodgerImg},
+			#{lodgerLabel},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE lodger_opinion SET 	
+			id = #{id},
+			lodger_id = #{lodgerId},
+			landlord_id = #{landlordId},
+			lodger_level = #{lodgerLevel},
+			lodger_remark = #{lodgerRemark},
+			lodger_img = #{lodgerImg},
+			lodger_label = #{lodgerLabel},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM lodger_opinion
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

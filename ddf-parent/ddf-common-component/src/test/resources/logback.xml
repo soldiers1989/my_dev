@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- <configuration scan="true" scanPeriod="30 seconds" > -->
+<configuration scan="false">
+	<!-- 控制台输出 -->
+       <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+             <pattern><![CDATA[%date{HH:mm:ss.SSS} %-5level %logger[%method,%line] - %msg%n]]></pattern>
+            </encoder>
+       </appender>
+
+	  <appender name="file2"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+	      <file>/logs/debug.log</file>
+          <filter class="ch.qos.logback.classic.filter.LevelFilter">
+              <level>info</level>
+              <!-- <onMatch>ACCEPT</onMatch>
+              <onMismatch>DENY </onMismatch> -->
+          </filter>
+          <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+              <FileNamePattern>/logs/debug.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			  <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>300MB</maxFileSize>
+			  </timeBasedFileNamingAndTriggeringPolicy>
+              <MaxHistory>60</MaxHistory>
+          </rollingPolicy>
+         <encoder>
+             <pattern><![CDATA[%date{HH:mm:ss.SSS} %-5level %logger[%method,%line] - %msg%n]]></pattern>
+         </encoder>
+     </appender>
+	 
+	 <logger name="com.fmzg">
+            <level value="info" />
+     </logger>
+     <root level="INFO">
+       <appender-ref ref="stdout" />
+     </root>
+</configuration>

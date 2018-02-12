@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.match.dao.RentDemandMatchRecordDao">
+    
+	<sql id="rentDemandMatchRecordColumns">
+		a.id AS "id",
+		a.house_id AS "houseId",
+		a.rent_demand_id AS "rentDemandId",
+		a.lodger_id AS "lodgerId",
+		a.area_ids AS "areaIds",
+		a.xiaoqu_ids AS "xiaoquIds",
+		a.metro_line_ids AS "metroLineIds",
+		a.metor_station_ids AS "metorStationIds",
+		a.min_amout AS "minAmout",
+		a.max_amout AS "maxAmout",
+		a.huxing AS "huxing",
+		a.house_label_ids AS "houseLabelIds",
+		a.rent_type AS "rentType",
+		a.match_status AS "matchStatus",
+		a.hide_flag AS "hideFlag",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="RentDemandMatchRecord">
+		SELECT 
+			<include refid="rentDemandMatchRecordColumns"/>
+		FROM rent_demand_match_record a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO rent_demand_match_record(
+			id,
+			house_id,
+			rent_demand_id,
+			lodger_id,
+			area_ids,
+			xiaoqu_ids,
+			metro_line_ids,
+			metor_station_ids,
+			min_amout,
+			max_amout,
+			huxing,
+			house_label_ids,
+			rent_type,
+			match_status,
+			hide_flag,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{houseId},
+			#{rentDemandId},
+			#{lodgerId},
+			#{areaIds},
+			#{xiaoquIds},
+			#{metroLineIds},
+			#{metorStationIds},
+			#{minAmout},
+			#{maxAmout},
+			#{huxing},
+			#{houseLabelIds},
+			#{rentType},
+			#{matchStatus},
+			#{hideFlag},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE rent_demand_match_record SET 	
+			id = #{id},
+			house_id = #{houseId},
+			rent_demand_id = #{rentDemandId},
+			lodger_id = #{lodgerId},
+			area_ids = #{areaIds},
+			xiaoqu_ids = #{xiaoquIds},
+			metro_line_ids = #{metroLineIds},
+			metor_station_ids = #{metorStationIds},
+			min_amout = #{minAmout},
+			max_amout = #{maxAmout},
+			huxing = #{huxing},
+			house_label_ids = #{houseLabelIds},
+			rent_type = #{rentType},
+			match_status = #{matchStatus},
+			hide_flag = #{hideFlag},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM rent_demand_match_record
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>mapperExt</name>
+	<filePath>${lastPackageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}DaoExt.xml</fileName>
+	<content><![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${basePackageName}.${bizPackageName}.dao.${ClassName}Dao">
+    <sql id="${className}Conditions">
+    	<where>
+			<#if table.delFlagExists>a.del_flag = ${"#"}{DEL_FLAG_NORMAL}</#if>
+			<if test=" ${className}!= null ">
+				<#list table.columnList as c>
+			<#if (c.isQuery?? && c.isQuery == "1" && c.javaType == "String") || (table.parentExists && table.parentTableFk == c.name)>
+				<if test="${className}.${c.javaFieldId} != null and ${className}.${c.javaFieldId} != ''">
+					AND a.${c.name} ${c.queryType} ${"#"}{${className}.${c.javaFieldId}}
+				</if>
+			</#if>
+			<#if (c.isQuery?? && c.isQuery == "1" && c.javaType != "String") || (table.parentExists && table.parentTableFk == c.name)>
+				<if test="${className}.${c.javaFieldId} != null">
+					AND a.${c.name} ${c.queryType} ${"#"}{${className}.${c.javaFieldId}}
+				</if>
+			</#if>
+				</#list>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="${ClassName}Vo">
+   		SELECT
+			<include refid="${className}Columns"/>
+		FROM ${table.name} a
+		<include refid="${className}Conditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${"$"}{sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${"$"}{pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM ${table.name} a
+		<include refid="${className}Conditions"/>
+   </select>
+</mapper>]]>
+	</content>
+</template>

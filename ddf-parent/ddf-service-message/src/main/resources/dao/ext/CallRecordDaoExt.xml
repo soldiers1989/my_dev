@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.CallRecordDao">
+    <sql id="callRecordConditions">
+    	<where>
+			
+			<if test=" callRecord!= null ">
+				<if test="callRecord.id != null and callRecord.id != ''">
+					AND a.id = #{callRecord.id}
+				</if>
+				<if test="callRecord.srcUserId != null and callRecord.srcUserId != ''">
+					AND a.src_user_id = #{callRecord.srcUserId}
+				</if>
+				<if test="callRecord.srcMobile != null and callRecord.srcMobile != ''">
+					AND a.src_mobile = #{callRecord.srcMobile}
+				</if>
+				<if test="callRecord.dstUserId != null and callRecord.dstUserId != ''">
+					AND a.dst_user_id = #{callRecord.dstUserId}
+				</if>
+				<if test="callRecord.dstMobile != null and callRecord.dstMobile != ''">
+					AND a.dst_mobile = #{callRecord.dstMobile}
+				</if>
+				<if test="callRecord.type != null and callRecord.type != ''">
+					AND a.type = #{callRecord.type}
+				</if>
+				<if test="callRecord.dataId != null and callRecord.dataId != ''">
+					AND a.data_id = #{callRecord.dataId}
+				</if>
+				<if test="callRecord.remark != null and callRecord.remark != ''">
+					AND a.remark = #{callRecord.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="CallRecordVo">
+   		SELECT
+			<include refid="callRecordColumns"/>
+		FROM call_record a
+		<include refid="callRecordConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM call_record a
+		<include refid="callRecordConditions"/>
+   </select>
+</mapper>

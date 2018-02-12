@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.LodgerComplainDao">
+    <sql id="lodgerComplainConditions">
+    	<where>
+			
+			<if test=" lodgerComplain!= null ">
+				<if test="lodgerComplain.id != null and lodgerComplain.id != ''">
+					AND a.id = #{lodgerComplain.id}
+				</if>
+				<if test="lodgerComplain.lodgerId != null and lodgerComplain.lodgerId != ''">
+					AND a.lodger_id = #{lodgerComplain.lodgerId}
+				</if>
+				<if test="lodgerComplain.landlordId != null and lodgerComplain.landlordId != ''">
+					AND a.landlord_id = #{lodgerComplain.landlordId}
+				</if>
+				<if test="lodgerComplain.type != null and lodgerComplain.type != ''">
+					AND a.type = #{lodgerComplain.type}
+				</if>
+				<if test="lodgerComplain.img != null and lodgerComplain.img != ''">
+					AND a.img = #{lodgerComplain.img}
+				</if>
+				<if test="lodgerComplain.remark != null and lodgerComplain.remark != ''">
+					AND a.remark = #{lodgerComplain.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="LodgerComplainVo">
+   		SELECT
+			<include refid="lodgerComplainColumns"/>
+		FROM lodger_complain a
+		<include refid="lodgerComplainConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM lodger_complain a
+		<include refid="lodgerComplainConditions"/>
+   </select>
+</mapper>

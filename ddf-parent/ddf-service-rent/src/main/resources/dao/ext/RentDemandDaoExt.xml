@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.RentDemandDao">
+    <sql id="rentDemandConditions">
+    	<where>
+			
+			<if test=" rentDemand!= null ">
+				<if test="rentDemand.id != null and rentDemand.id != ''">
+					AND a.id = #{rentDemand.id}
+				</if>
+				<if test="rentDemand.lodgerId != null and rentDemand.lodgerId != ''">
+					AND a.lodger_id = #{rentDemand.lodgerId}
+				</if>
+				<if test="rentDemand.areaIds != null and rentDemand.areaIds != ''">
+					AND a.area_ids = #{rentDemand.areaIds}
+				</if>
+				<if test="rentDemand.xiaoquIds != null and rentDemand.xiaoquIds != ''">
+					AND a.xiaoqu_ids = #{rentDemand.xiaoquIds}
+				</if>
+				<if test="rentDemand.metroLineIds != null and rentDemand.metroLineIds != ''">
+					AND a.metro_line_ids = #{rentDemand.metroLineIds}
+				</if>
+				<if test="rentDemand.metorStationIds != null and rentDemand.metorStationIds != ''">
+					AND a.metor_station_ids = #{rentDemand.metorStationIds}
+				</if>
+				<if test="rentDemand.minAmout != null">
+					AND a.min_amout = #{rentDemand.minAmout}
+				</if>
+				<if test="rentDemand.maxAmout != null">
+					AND a.max_amout = #{rentDemand.maxAmout}
+				</if>
+				<if test="rentDemand.huxing != null and rentDemand.huxing != ''">
+					AND a.huxing = #{rentDemand.huxing}
+				</if>
+				<if test="rentDemand.houseLabelIds != null and rentDemand.houseLabelIds != ''">
+					AND a.house_label_ids = #{rentDemand.houseLabelIds}
+				</if>
+				<if test="rentDemand.apartmentType != null">
+					AND a.apartment_type = #{rentDemand.apartmentType}
+				</if>
+				<if test="rentDemand.matchStatus != null">
+					AND a.match_status = #{rentDemand.matchStatus}
+				</if>
+				<if test="rentDemand.hideFlag != null">
+					AND a.hide_flag = #{rentDemand.hideFlag}
+				</if>
+				<if test="rentDemand.remark != null and rentDemand.remark != ''">
+					AND a.remark = #{rentDemand.remark}
+				</if>
+				<if test="rentDemand.createDate != null and rentDemand.createDate != ''">
+					AND a.create_date = #{rentDemand.createDate}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &lt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &gt; #{endCreateDate}
+				</if>
+				<if test="rentDemand.updateDate != null and rentDemand.updateDate != ''">
+					AND a.update_date = #{rentDemand.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="RentDemandVo">
+   		SELECT
+			<include refid="rentDemandColumns"/>
+		FROM rent_demand a
+		<include refid="rentDemandConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM rent_demand a
+		<include refid="rentDemandConditions"/>
+   </select>
+   
+   	<update id="remove4id">
+		UPDATE rent_demand SET 	
+			hide_flag = 1
+		WHERE id = #{id}
+	</update>
+</mapper>

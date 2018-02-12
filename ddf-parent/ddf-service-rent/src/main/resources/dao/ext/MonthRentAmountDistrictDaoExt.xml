@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountDistrictDao">
+    <sql id="monthRentAmountDistrictConditions">
+    	<where>
+			
+			<if test=" monthRentAmountDistrict!= null ">
+				<if test="monthRentAmountDistrict.id != null and monthRentAmountDistrict.id != ''">
+					AND a.id = #{monthRentAmountDistrict.id}
+				</if>
+				<if test="monthRentAmountDistrict.districtId != null and monthRentAmountDistrict.districtId != ''">
+					AND a.district_id = #{monthRentAmountDistrict.districtId}
+				</if>
+				<if test="monthRentAmountDistrict.date != null and monthRentAmountDistrict.date != ''">
+					AND a.date = #{monthRentAmountDistrict.date}
+				</if>
+				<if test="monthRentAmountDistrict.bdate != null and monthRentAmountDistrict.bdate != ''">
+					AND a.bdate = #{monthRentAmountDistrict.bdate}
+				</if>
+				<if test="monthRentAmountDistrict.edate != null and monthRentAmountDistrict.edate != ''">
+					AND a.edate = #{monthRentAmountDistrict.edate}
+				</if>
+				<if test="monthRentAmountDistrict.status != null">
+					AND a.status = #{monthRentAmountDistrict.status}
+				</if>
+				<if test="monthRentAmountDistrict.statsDate != null and monthRentAmountDistrict.statsDate != ''">
+					AND a.stats_date = #{monthRentAmountDistrict.statsDate}
+				</if>
+				<if test="monthRentAmountDistrict.oneRoomAmount != null and monthRentAmountDistrict.oneRoomAmount != ''">
+					AND a.one_room_amount = #{monthRentAmountDistrict.oneRoomAmount}
+				</if>
+				<if test="monthRentAmountDistrict.twoRoomAmount != null and monthRentAmountDistrict.twoRoomAmount != ''">
+					AND a.two_room_amount = #{monthRentAmountDistrict.twoRoomAmount}
+				</if>
+				<if test="monthRentAmountDistrict.threeRoomAmount != null and monthRentAmountDistrict.threeRoomAmount != ''">
+					AND a.three_room_amount = #{monthRentAmountDistrict.threeRoomAmount}
+				</if>
+				<if test="monthRentAmountDistrict.calOneRoomAmount != null and monthRentAmountDistrict.calOneRoomAmount != ''">
+					AND a.cal_one_room_amount = #{monthRentAmountDistrict.calOneRoomAmount}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MonthRentAmountDistrictVo">
+   		SELECT
+			<include refid="monthRentAmountDistrictColumns"/>
+		FROM month_rent_amount_district a
+		<include refid="monthRentAmountDistrictConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM month_rent_amount_district a
+		<include refid="monthRentAmountDistrictConditions"/>
+   </select>
+	<select id="findListByDateAndStatus" resultType="MonthRentAmountDistrictVo">
+		SELECT
+			<include refid="monthRentAmountDistrictColumns"/>
+		FROM
+		month_rent_amount_district a
+		WHERE
+		edate <![CDATA[<]]> NOW()
+		AND `status` = 'WAIT'
+	</select>
+	<update id="statsModify">
+		UPDATE month_rent_amount_district SET
+		status = #{status},
+		stats_date = #{statsDate},
+		one_room_amount = #{oneRoomAmount},
+		two_room_amount = #{twoRoomAmount},
+		three_room_amount = #{threeRoomAmount},
+		cal_one_room_amount = #{calOneRoomAmount}
+		WHERE id = #{id}
+	</update>
+	<update id="removeByDate">
+		DELETE FROM month_rent_amount_district
+		WHERE date = #{date}
+	</update>
+	
+	<select id="find4thisMonth" resultType="MonthRentAmountDistrictVo">
+		SELECT
+			<include refid="monthRentAmountDistrictColumns"/>
+		FROM
+		month_rent_amount_district a
+		WHERE
+		a.district_id=#{districtId} and DATE_FORMAT( a.stats_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' );
+	</select>
+</mapper>

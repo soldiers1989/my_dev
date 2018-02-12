@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.student.dao.StudentDao">
+    
+	<sql id="studentColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.age AS "age",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.remark AS "remark"
+	</sql>
+    
+	<select id="query4id" resultType="Student">
+		SELECT 
+			<include refid="studentColumns"/>
+		FROM student a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO student(
+			id,
+			name,
+			age,
+			create_date,
+			update_date,
+			remark
+		) VALUES (
+			#{id},
+			#{name},
+			#{age},
+			#{createDate},
+			#{updateDate},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE student SET 	
+			name = #{name},
+			age = #{age},
+			update_date = #{updateDate},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM student
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.MobileMessageDao">
+    <sql id="mobileMessageConditions">
+    	<where>
+			
+			<if test=" mobileMessage!= null ">
+				<if test="mobileMessage.id != null and mobileMessage.id != ''">
+					AND a.id = #{mobileMessage.id}
+				</if>
+				<if test="mobileMessage.mobile != null and mobileMessage.mobile != ''">
+					AND a.mobile = #{mobileMessage.mobile}
+				</if>
+				<if test="mobileMessage.type != null and mobileMessage.type != ''">
+					AND a.type = #{mobileMessage.type}
+				</if>
+				<if test="mobileMessage.content != null and mobileMessage.content != ''">
+					AND a.content = #{mobileMessage.content}
+				</if>
+				<if test="mobileMessage.switchStatus != null and mobileMessage.switchStatus != ''">
+					AND a.switch_status = #{mobileMessage.switchStatus}
+				</if>
+				<if test="mobileMessage.remark != null and mobileMessage.remark != ''">
+					AND a.remark = #{mobileMessage.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MobileMessageVo">
+   		SELECT
+			<include refid="mobileMessageColumns"/>
+		FROM mobile_message a
+		<include refid="mobileMessageConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM mobile_message a
+		<include refid="mobileMessageConditions"/>
+   </select>
+</mapper>

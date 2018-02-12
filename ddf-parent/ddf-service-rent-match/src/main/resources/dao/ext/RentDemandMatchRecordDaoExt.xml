@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.match.dao.RentDemandMatchRecordDao">
+    <sql id="rentDemandMatchRecordConditions">
+        <where>
+
+            <if test=" rentDemandMatchRecord!= null ">
+                <if test="rentDemandMatchRecord.id != null and rentDemandMatchRecord.id != ''">
+                    AND a.id = #{rentDemandMatchRecord.id}
+                </if>
+                <if test="rentDemandMatchRecord.houseId != null and rentDemandMatchRecord.houseId != ''">
+                    AND a.house_id = #{rentDemandMatchRecord.houseId}
+                </if>
+                <if test="rentDemandMatchRecord.rentDemandId != null and rentDemandMatchRecord.rentDemandId != ''">
+                    AND a.rent_demand_id = #{rentDemandMatchRecord.rentDemandId}
+                </if>
+                <if test="rentDemandMatchRecord.lodgerId != null and rentDemandMatchRecord.lodgerId != ''">
+                    AND a.lodger_id = #{rentDemandMatchRecord.lodgerId}
+                </if>
+                <if test="rentDemandMatchRecord.areaIds != null and rentDemandMatchRecord.areaIds != ''">
+                    AND a.area_ids = #{rentDemandMatchRecord.areaIds}
+                </if>
+                <if test="rentDemandMatchRecord.xiaoquIds != null and rentDemandMatchRecord.xiaoquIds != ''">
+                    AND a.xiaoqu_ids = #{rentDemandMatchRecord.xiaoquIds}
+                </if>
+                <if test="rentDemandMatchRecord.metroLineIds != null and rentDemandMatchRecord.metroLineIds != ''">
+                    AND a.metro_line_ids = #{rentDemandMatchRecord.metroLineIds}
+                </if>
+                <if test="rentDemandMatchRecord.metorStationIds != null and rentDemandMatchRecord.metorStationIds != ''">
+                    AND a.metor_station_ids = #{rentDemandMatchRecord.metorStationIds}
+                </if>
+                <if test="rentDemandMatchRecord.minAmout != null and rentDemandMatchRecord.minAmout != ''">
+                    AND a.min_amout = #{rentDemandMatchRecord.minAmout}
+                </if>
+                <if test="rentDemandMatchRecord.maxAmout != null and rentDemandMatchRecord.maxAmout != ''">
+                    AND a.max_amout = #{rentDemandMatchRecord.maxAmout}
+                </if>
+                <if test="rentDemandMatchRecord.huxing != null and rentDemandMatchRecord.huxing != ''">
+                    AND a.huxing = #{rentDemandMatchRecord.huxing}
+                </if>
+                <if test="rentDemandMatchRecord.houseLabelIds != null and rentDemandMatchRecord.houseLabelIds != ''">
+                    AND a.house_label_ids = #{rentDemandMatchRecord.houseLabelIds}
+                </if>
+                <if test="rentDemandMatchRecord.rentType != null">
+                    AND a.rent_type = #{rentDemandMatchRecord.rentType}
+                </if>
+                <if test="rentDemandMatchRecord.matchStatus != null">
+                    AND a.match_status = #{rentDemandMatchRecord.matchStatus}
+                </if>
+                <if test="rentDemandMatchRecord.hideFlag != null">
+                    AND a.hide_flag = #{rentDemandMatchRecord.hideFlag}
+                </if>
+                <if test="rentDemandMatchRecord.remark != null">
+                    AND a.remark = #{rentDemandMatchRecord.remark}
+                </if>
+                <if test="rentDemandMatchRecord.createDate != null and rentDemandMatchRecord.createDate != ''">
+                    AND a.create_date = #{rentDemandMatchRecord.createDate}
+                </if>
+                <if test="rentDemandMatchRecord.updateDate != null and rentDemandMatchRecord.updateDate != ''">
+                    AND a.update_date = #{rentDemandMatchRecord.updateDate}
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="findList" resultType="RentDemandMatchRecordVo">
+        SELECT
+        <include refid="rentDemandMatchRecordColumns"/>
+        FROM rent_demand_match_record a
+        <include refid="rentDemandMatchRecordConditions"/>
+        <if test="sortSql != null and sortSql != ''">
+            ${sortSql}
+        </if>
+        <if test="pageSql != null and pageSql != ''">
+            ${pageSql}
+        </if>
+
+    </select>
+    <select id="findCount" resultType="java.lang.Long">
+        SELECT
+        COUNT(1)
+        FROM rent_demand_match_record a
+        <include refid="rentDemandMatchRecordConditions"/>
+    </select>
+    <select id="findList4houseId4groupbylodgerId" resultType="RentDemandMatchRecordVo">
+        SELECT
+        <include refid="rentDemandMatchRecordColumns"/>
+        FROM rent_demand_match_record a
+        <include refid="rentDemandMatchRecordConditions"/>
+        GROUP BY a.lodger_id
+        <if test="sortSql != null and sortSql != ''">
+            ${sortSql}
+        </if>
+        <if test="pageSql != null and pageSql != ''">
+            ${pageSql}
+        </if>
+    </select>
+</mapper>

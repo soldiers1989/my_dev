@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.MessageTaskDao">
+    
+	<sql id="messageTaskColumns">
+		a.id AS "id",
+		a.biz_type AS "bizType",
+		a.data_id AS "dataId",
+		a.status AS "status",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="MessageTask">
+		SELECT 
+			<include refid="messageTaskColumns"/>
+		FROM message_task a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO message_task(
+			id,
+			biz_type,
+			data_id,
+			status,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{bizType},
+			#{dataId},
+			#{status},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE message_task SET 	
+			id = #{id},
+			biz_type = #{bizType},
+			data_id = #{dataId},
+			status = #{status},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM message_task
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

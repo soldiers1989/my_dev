@@ -1,0 +1,13 @@
+eureka:
+  client:
+    service-url: 
+       defaultZone: http://10.5.3.35:8000/eureka/
+  instance:
+    hostname: ddf-service-message
+       
+spring:
+  cloud:
+    config:
+      label: dev
+      profile: test
+      discovery.serviceId: config-server

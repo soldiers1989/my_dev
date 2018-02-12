@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.DepositOrderDao">
+    <sql id="depositOrderConditions">
+    	<where>
+			
+			<if test=" depositOrder!= null ">
+				<if test="depositOrder.id != null and depositOrder.id != ''">
+					AND a.id = #{depositOrder.id}
+				</if>
+				<if test="depositOrder.landlordId != null and depositOrder.landlordId != ''">
+					AND a.landlord_id = #{depositOrder.landlordId}
+				</if>
+				<if test="depositOrder.lodgerId != null and depositOrder.lodgerId != ''">
+					AND a.lodger_id = #{depositOrder.lodgerId}
+				</if>
+				<if test="depositOrder.houseDepositContractId != null and depositOrder.houseDepositContractId != ''">
+					AND a.house_deposit_contract_id = #{depositOrder.houseDepositContractId}
+				</if>
+				<if test="depositOrder.houseId != null and depositOrder.houseId != ''">
+					AND a.house_id = #{depositOrder.houseId}
+				</if>
+				<if test="depositOrder.no != null and depositOrder.no != ''">
+					AND a.no = #{depositOrder.no}
+				</if>
+				<if test="depositOrder.amount != null and depositOrder.amount != ''">
+					AND a.amount = #{depositOrder.amount}
+				</if>
+				<if test="depositOrder.alipayTradeNo != null and depositOrder.alipayTradeNo != ''">
+					AND a.alipay_trade_no = #{depositOrder.alipayTradeNo}
+				</if>
+				<if test="depositOrder.status != null and depositOrder.status != ''">
+					AND a.status = #{depositOrder.status}
+				</if>
+				<if test="depositOrder.remark != null and depositOrder.remark != ''">
+					AND a.remark = #{depositOrder.remark}
+				</if>
+				<if test="depositOrder.createDate != null and depositOrder.createDate != ''">
+					AND a.create_date = #{depositOrder.createDate}
+				</if>
+				<if test="depositOrder.updateDate != null and depositOrder.updateDate != ''">
+					AND a.update_date = #{depositOrder.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="DepositOrderVo">
+   		SELECT
+			<include refid="depositOrderColumns"/>
+		FROM deposit_order a
+		<include refid="depositOrderConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM deposit_order a
+		<include refid="depositOrderConditions"/>
+   </select>
+</mapper>

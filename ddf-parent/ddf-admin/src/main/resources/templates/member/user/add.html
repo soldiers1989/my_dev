@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">*用户名：</label>
+								<div class="col-sm-8">
+									<input id="userName" name="userName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">*手机号码：</label>
+								<div class="col-sm-8">
+									<input id="mobile" name="mobile" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">*用户密码：</label>
+								<div class="col-sm-8">
+									<input id="password" name="password" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">支付密码：</label>
+								<div class="col-sm-8">
+									<input id="payPassword" name="payPassword" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">头像：</label>
+								<div class="col-sm-8">
+									<input id="headImg" name="headImg" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">昵称：</label>
+								<div class="col-sm-8">
+									<input id="nickName" name="nickName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">性别：</label>
+								<div class="col-sm-8">
+									<select id="sex" name="sex" data-placeholder="性别" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${UserSex}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">生日：</label>
+								<div class="col-sm-8">
+									<input id="birthday" name="birthday" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">行业(字典选)：</label>
+								<div class="col-sm-8">
+									<input id="industry" name="industry" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">个性签名：</label>
+								<div class="col-sm-8">
+									<input id="personalitySign" name="personalitySign" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">个人画像(生活方式、关于个人、兴趣爱好、饮食习惯 标签多选)：</label>
+								<div class="col-sm-8">
+									<input id="personas" name="personas" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">邀请人(手机号码)：</label>
+								<div class="col-sm-8">
+									<input id="inviter" name="inviter" class="form-control isPhone" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">芝麻信用状态：</label>
+								<div class="col-sm-8">
+									<select id="zhimaCreditFlag" name ="zhimaCreditFlag" data-placeholder="芝麻信用状态" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${AlipayZhimaCreditStatus}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">业务类型：</label>
+								<div class="col-sm-8">
+									<select id="businessType" name="businessType" data-placeholder="业务类型" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${RealNameType}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">实名认证状态：</label>
+								<div class="col-sm-8">
+									<select id="realNameFlag" name="realNameFlag" data-placeholder="实名认证状态" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${RealNameStatus}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">真房东计划(是否交押金)：</label>
+								<div class="col-sm-8">
+									<select id="bondFlag" name="bondFlag" data-placeholder="真房东计划" class="form-control chosen-select" tabindex="2" style="width: 100%">
+										<option value="1">是</option>
+										<option value="0">否</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">接听状态(免骚扰)：</label>
+								<div class="col-sm-8">
+									<select id="answerFlag" name="answerFlag" data-placeholder="真房东计划" class="form-control chosen-select" tabindex="2" style="width: 100%">
+										<option value="1">是</option>
+										<option value="0">否</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">账号状态：</label>
+								<div class="col-sm-8">
+									<select id="status" name="status" data-placeholder="用户状态" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="status:${UserStatus}" th:text="${status.explain}" th:value="${status}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" class="form-control" type="text">
+								</div>
+							</div>
+							<!-- <div class="form-group">
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input type="text" class="laydate-icon layer-date form-control" id="createDate" name="createDate"  placeholder="请选择日期"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="background-color: #fff;" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input type="text" class="laydate-icon layer-date form-control" id="updateDate" name="updateDate"  placeholder="请选择日期"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" style="background-color: #fff;" readonly="readonly"/>
+								</div>
+							</div> -->
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/member/user/add.js">
+	</script>
+</body>
+</html>

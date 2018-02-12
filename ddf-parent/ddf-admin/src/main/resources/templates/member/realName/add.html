@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">用户ID：</label>
+								<div class="col-sm-8">
+									<input id="userId" name="userId" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">真实姓名/公司名称：</label>
+								<div class="col-sm-8">
+									<input id="realName" name="realName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">身份证/营业执照号：</label>
+								<div class="col-sm-8">
+									<input id="idCard" name="idCard" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">正面：</label>
+								<div class="col-sm-8">
+									<input id="faceImg" name="faceImg" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">背面：</label>
+								<div class="col-sm-8">
+									<input id="backImg" name="backImg" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">状态：</label>
+								<div class="col-sm-8">
+									<select id="status" name="status" data-placeholder="状态" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="status:${RealNameStatus}" th:text="${status.explain}" th:value="${status}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">审核理由：</label>
+								<div class="col-sm-8">
+									<input id="reviewRemark" name="reviewRemark" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">类型：</label>
+								<div class="col-sm-8">
+									<select id="type" name="type" data-placeholder="类型" class="form-control chosen-select" tabindex="2" style="width: 100%" >
+										<option th:each="dict:${RealNameType}" th:text="${dict.explain}" th:value="${dict}" />
+									</select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" class="form-control" type="text">
+								</div>
+							</div>
+							<!-- <div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="updateDate" name="updateDate" class="form-control" type="text">
+								</div>
+							</div> -->
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/member/realName/add.js">
+	</script>
+</body>
+</html>

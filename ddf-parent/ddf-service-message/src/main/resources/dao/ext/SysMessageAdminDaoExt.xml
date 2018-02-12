@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.SysMessageAdminDao">
+    <sql id="sysMessageAdminConditions">
+    	<where>
+			
+			<if test=" sysMessageAdmin!= null ">
+				<if test="sysMessageAdmin.id != null and sysMessageAdmin.id != ''">
+					AND a.id = #{sysMessageAdmin.id}
+				</if>
+				<if test="sysMessageAdmin.userId != null and sysMessageAdmin.userId != ''">
+					AND a.user_id = #{sysMessageAdmin.userId}
+				</if>
+				<if test="sysMessageAdmin.type != null and sysMessageAdmin.type != ''">
+					AND a.type = #{sysMessageAdmin.type}
+				</if>
+				<if test="sysMessageAdmin.img != null and sysMessageAdmin.img != ''">
+					AND a.img = #{sysMessageAdmin.img}
+				</if>
+				<if test="sysMessageAdmin.title != null and sysMessageAdmin.title != ''">
+					AND a.title = #{sysMessageAdmin.title}
+				</if>
+				<if test="sysMessageAdmin.content != null and sysMessageAdmin.content != ''">
+					AND a.content = #{sysMessageAdmin.content}
+				</if>
+				<if test="sysMessageAdmin.url != null and sysMessageAdmin.url != ''">
+					AND a.url = #{sysMessageAdmin.url}
+				</if>
+				<if test="sysMessageAdmin.status != null and sysMessageAdmin.status != ''">
+					AND a.status = #{sysMessageAdmin.status}
+				</if>
+				<if test="sysMessageAdmin.sendType != null and sysMessageAdmin.sendType != ''">
+					AND a.send_type = #{sysMessageAdmin.sendType}
+				</if>
+				<if test="sysMessageAdmin.sendUserIds != null and sysMessageAdmin.sendUserIds != ''">
+					AND a.send_user_ids = #{sysMessageAdmin.sendUserIds}
+				</if>
+				<if test="sysMessageAdmin.remark != null and sysMessageAdmin.remark != ''">
+					AND a.remark = #{sysMessageAdmin.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="SysMessageAdminVo">
+   		SELECT
+			<include refid="sysMessageAdminColumns"/>
+		FROM sys_message_admin a
+		<include refid="sysMessageAdminConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM sys_message_admin a
+		<include refid="sysMessageAdminConditions"/>
+   </select>
+</mapper>

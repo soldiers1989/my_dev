@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.member.dao.UserDao">
+    
+	<sql id="userColumns">
+		a.id AS "id",
+		a.user_name AS "userName",
+		a.password AS "password",
+		a.pay_password AS "payPassword",
+		a.mobile AS "mobile",
+		a.head_img AS "headImg",
+		a.nick_name AS "nickName",
+		a.sex AS "sex",
+		a.birthday AS "birthday",
+		a.industry AS "industry",
+		a.personality_sign AS "personalitySign",
+		a.personas AS "personas",
+		a.inviter AS "inviter",
+		a.zhima_credit_flag AS "zhimaCreditFlag",
+		a.business_type AS "businessType",
+		a.real_name_flag AS "realNameFlag",
+		a.alipay_flay AS "alipayFlay",
+		a.bond_flag AS "bondFlag",
+		a.answer_flag AS "answerFlag",
+		a.status AS "status",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="User">
+		SELECT 
+			<include refid="userColumns"/>
+		FROM user a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO user(
+			id,
+			user_name,
+			password,
+			pay_password,
+			mobile,
+			head_img,
+			nick_name,
+			sex,
+			birthday,
+			industry,
+			personality_sign,
+			personas,
+			inviter,
+			zhima_credit_flag,
+			business_type,
+			real_name_flag,
+			alipay_flay,
+			bond_flag,
+			answer_flag,
+			status,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userName},
+			#{password},
+			#{payPassword},
+			#{mobile},
+			#{headImg},
+			#{nickName},
+			#{sex},
+			#{birthday},
+			#{industry},
+			#{personalitySign},
+			#{personas},
+			#{inviter},
+			#{zhimaCreditFlag},
+			#{businessType},
+			#{realNameFlag},
+			#{alipayFlay},
+			#{bondFlag},
+			#{answerFlag},
+			#{status},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE user SET 	
+			user_name = #{userName},
+			password = #{password},
+			pay_password = #{payPassword},
+			mobile = #{mobile},
+			head_img = #{headImg},
+			nick_name = #{nickName},
+			sex = #{sex},
+			birthday = #{birthday},
+			industry = #{industry},
+			personality_sign = #{personalitySign},
+			personas = #{personas},
+			inviter = #{inviter},
+			zhima_credit_flag = #{zhimaCreditFlag},
+			business_type = #{businessType},
+			real_name_flag = #{realNameFlag},
+			alipay_flay = #{alipayFlay},
+			bond_flag = #{bondFlag},
+			answer_flag = #{answerFlag},
+			status = #{status},
+			remark = #{remark},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM user
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

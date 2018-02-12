@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ApartmentMarkDao">
+    
+	<sql id="apartmentMarkColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.apartment_id AS "apartmentId",
+		a.apartment_type AS "apartmentType",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="ApartmentMark">
+		SELECT 
+			<include refid="apartmentMarkColumns"/>
+		FROM apartment_mark a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO apartment_mark(
+			id,
+			user_id,
+			apartment_id,
+			apartment_type,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userId},
+			#{apartmentId},
+			#{apartmentType},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE apartment_mark SET 	
+			id = #{id},
+			user_id = #{userId},
+			apartment_id = #{apartmentId},
+			apartment_type = #{apartmentType},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM apartment_mark
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

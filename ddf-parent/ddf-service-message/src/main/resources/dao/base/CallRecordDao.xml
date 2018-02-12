@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.CallRecordDao">
+    
+	<sql id="callRecordColumns">
+		a.id AS "id",
+		a.src_user_id AS "srcUserId",
+		a.src_mobile AS "srcMobile",
+		a.dst_user_id AS "dstUserId",
+		a.dst_mobile AS "dstMobile",
+		a.type AS "type",
+		a.data_id AS "dataId",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="CallRecord">
+		SELECT 
+			<include refid="callRecordColumns"/>
+		FROM call_record a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO call_record(
+			id,
+			src_user_id,
+			src_mobile,
+			dst_user_id,
+			dst_mobile,
+			type,
+			data_id,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{srcUserId},
+			#{srcMobile},
+			#{dstUserId},
+			#{dstMobile},
+			#{type},
+			#{dataId},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE call_record SET 	
+			id = #{id},
+			src_user_id = #{srcUserId},
+			src_mobile = #{srcMobile},
+			dst_user_id = #{dstUserId},
+			dst_mobile = #{dstMobile},
+			type = #{type},
+			data_id = #{dataId},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM call_record
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

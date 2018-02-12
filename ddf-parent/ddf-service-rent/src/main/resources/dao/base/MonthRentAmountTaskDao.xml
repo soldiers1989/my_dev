@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountTaskDao">
+    
+	<sql id="monthRentAmountTaskColumns">
+		a.id AS "id",
+		a.date AS "date",
+		a.bdate AS "bdate",
+		a.edate AS "edate",
+		a.status AS "status"
+	</sql>
+    
+	<select id="query4id" resultType="MonthRentAmountTask">
+		SELECT 
+			<include refid="monthRentAmountTaskColumns"/>
+		FROM month_rent_amount_task a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO month_rent_amount_task(
+			id,
+			date,
+			bdate,
+			edate,
+			status
+		) VALUES (
+			#{id},
+			#{date},
+			#{bdate},
+			#{edate},
+			#{status}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE month_rent_amount_task SET 	
+			id = #{id},
+			date = #{date},
+			bdate = #{bdate},
+			edate = #{edate},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM month_rent_amount_task
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

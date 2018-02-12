@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.ChatRecordDao">
+    <sql id="chatRecordConditions">
+    	<where>
+			
+			<if test=" chatRecord!= null ">
+				<if test="chatRecord.id != null and chatRecord.id != ''">
+					AND a.id = #{chatRecord.id}
+				</if>
+				<if test="chatRecord.lodgerId != null and chatRecord.lodgerId != ''">
+					AND a.lodger_id = #{chatRecord.lodgerId}
+				</if>
+				<if test="chatRecord.landlordId != null and chatRecord.landlordId != ''">
+					AND a.landlord_id = #{chatRecord.landlordId}
+				</if>
+				<if test="chatRecord.content != null and chatRecord.content != ''">
+					AND a.content = #{chatRecord.content}
+				</if>
+				<if test="chatRecord.type != null and chatRecord.type != ''">
+					AND a.type = #{chatRecord.type}
+				</if>
+				<if test="chatRecord.remark != null and chatRecord.remark != ''">
+					AND a.remark = #{chatRecord.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ChatRecordVo">
+   		SELECT
+			<include refid="chatRecordColumns"/>
+		FROM chat_record a
+		<include refid="chatRecordConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM chat_record a
+		<include refid="chatRecordConditions"/>
+   </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>service</name>
+	<filePath>${packageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}Service.java</fileName>
+	<content><![CDATA[
+
+package ${basePackageName}.${bizPackageName}.service.simple;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ddf.component.mybatis.api.impl.CrudServiceImpl;
+import com.ddf.entity.base.dto.Page;
+import com.github.pagehelper.PageHelper;
+import ${basePackageName}.entity.${bizPackageName}.dto.${ClassName};
+import ${basePackageName}.entity.${bizPackageName}.query.${ClassName}Query;
+import ${basePackageName}.entity.${bizPackageName}.vo.${ClassName}Vo;
+import ${basePackageName}.${bizPackageName}.dao.${ClassName}Dao;
+
+/**
+ * ${functionName}Service
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Service
+public class ${ClassName}Service extends CrudServiceImpl<${ClassName},${ClassName}Vo,${ClassName}Query>{
+	@Autowired
+	private ${ClassName}Dao ${className}Dao;
+	
+	public Page<${ClassName}Vo> query4page(int pageNum, int pageSize){
+		${ClassName}Query ${className}Query = new ${ClassName}Query();
+		${className}Query.buildPageSql(pageNum, pageSize);
+		List<${ClassName}Vo> list = this.findList(${className}Query);
+		long totalCount = this.findCount(${className}Query);
+		Page<${ClassName}Vo> page = new Page<${ClassName}Vo>(pageNum, pageSize, totalCount, list);
+		return page;
+	}
+	
+
+	public Page<${ClassName}Vo> query4pagehelper(int pageNum, int pageSize){
+		${ClassName}Query ${className}Query = new ${ClassName}Query();
+		PageHelper.startPage(pageNum, pageSize);
+        List<${ClassName}Vo> list = this.findList(${className}Query);
+        Page<${ClassName}Vo> page = new Page<${ClassName}Vo>(list);
+        return page;
+	}
+}]]>
+	</content>
+</template>

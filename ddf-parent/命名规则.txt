@@ -1,0 +1,36 @@
+﻿一：全局API：UnityApi
+1,获得当前时间：getCurrentDate();    //在一个事务内，不要反复调用；应该调用一次赋值给变量，重复使用该变量
+2，获得ID：generateId(TableName tableName)
+
+二：接口方法设计：
+1，方法参数中尽量避免多个对象：举例  doSomething(Object obj1,User user1);
+1，当方法中有多个参数id 应该为第一个参数：举例doSomething(String id,String s1,String s2)
+
+
+三：实体类
+1，实体类必须继承DataEntity，对应表结构必须有id,remark,create_date,update_date字段
+2，实体类类名上必须有@ApiModel(description = "什么什么类")注解，属性必须有@Field(value="数据库字段名")注解和@ApiModelProperty(value="数据库字段说明")注解
+3，属性名必须驼峰法命名
+4，所有的钱字段，数据库必须是：decimal(15,2)，实体类为：BigDecimal;属性名为： amount
+5，所有的用于排序字段（面积，室，厅）必须为数字类型的，不能为String
+6，统一字段：主键(id)，备注(remark)，钱(amount)
+7，状态为全部用枚举
+
+四：枚举使用
+1，一般为：“枚举名（解释）”的写法，举例：“wait_review("未审核")”
+ 需要排序的为：“枚举名（解释，数字）”的写法，举例：“wait_review("未审核",0)；
+             
+2，审核枚举统一：
+wait_review("未审核"),
+review_pass("审核通过"),
+review_reject("审核驳回");
+
+
+
+
+=============================================swagger地址=============================================
+http://localhost:8080/fmzgApi/swagger-ui.html
+
+
+
+	

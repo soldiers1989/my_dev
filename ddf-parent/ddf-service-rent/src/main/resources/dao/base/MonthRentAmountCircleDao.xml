@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountCircleDao">
+    
+	<sql id="monthRentAmountCircleColumns">
+		a.id AS "id",
+		a.circle_id AS "circleId",
+		a.circle_name AS "circleName",
+		a.lng AS "lng",
+		a.lat AS "lat",
+		a.date AS "date",
+		a.stats_date AS "statsDate",
+		a.one_room_amount AS "oneRoomAmount",
+		a.two_room_amount AS "twoRoomAmount",
+		a.three_room_amount AS "threeRoomAmount",
+		a.cal_one_room_amount AS "calOneRoomAmount",
+		a.bdate AS "bdate",
+		a.edate AS "edate",
+		a.status AS "status"
+	</sql>
+    
+	<select id="query4id" resultType="MonthRentAmountCircle">
+		SELECT 
+			<include refid="monthRentAmountCircleColumns"/>
+		FROM month_rent_amount_circle a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO month_rent_amount_circle(
+			id,
+			circle_id,
+			circle_name,
+			lng,
+			lat,
+			date,
+			stats_date,
+			one_room_amount,
+			two_room_amount,
+			three_room_amount,
+			cal_one_room_amount,
+			bdate,
+			edate,
+			status
+		) VALUES (
+			#{id},
+			#{circleId},
+			#{circleName},
+			#{lng},
+			#{lat},
+			#{date},
+			#{statsDate},
+			#{oneRoomAmount},
+			#{twoRoomAmount},
+			#{threeRoomAmount},
+			#{calOneRoomAmount},
+			#{bdate},
+			#{edate},
+			#{status}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE month_rent_amount_circle SET 	
+			id = #{id},
+			circle_id = #{circleId},
+			circle_name = #{circleName},
+			lng = #{lng},
+			lat = #{lat},
+			date = #{date},
+			stats_date = #{statsDate},
+			one_room_amount = #{oneRoomAmount},
+			two_room_amount = #{twoRoomAmount},
+			three_room_amount = #{threeRoomAmount},
+			cal_one_room_amount = #{calOneRoomAmount},
+			bdate = #{bdate},
+			edate = #{edate},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM month_rent_amount_circle
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

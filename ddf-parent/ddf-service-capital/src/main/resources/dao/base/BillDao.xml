@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.BillDao">
+    
+	<sql id="billColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.order_type AS "orderType",
+		a.order_id AS "orderId",
+		a.order_no AS "orderNo",
+		a.amount AS "amount",
+		a.status AS "status",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="Bill">
+		SELECT 
+			<include refid="billColumns"/>
+		FROM bill a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO bill(
+			id,
+			user_id,
+			order_type,
+			order_id,
+			order_no,
+			amount,
+			status,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userId},
+			#{orderType},
+			#{orderId},
+			#{orderNo},
+			#{amount},
+			#{status},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE bill SET 	
+			id = #{id},
+			user_id = #{userId},
+			order_type = #{orderType},
+			order_id = #{orderId},
+			order_no = #{orderNo},
+			amount = #{amount},
+			status = #{status},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM bill
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

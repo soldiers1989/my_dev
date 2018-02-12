@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.member.dao.RealNameDao">
+    <sql id="realNameConditions">
+    	<where>
+			
+			<if test=" realName!= null ">
+				<if test="realName.id != null and realName.id != ''">
+					AND a.id = #{realName.id}
+				</if>
+				<if test="realName.userId != null and realName.userId != ''">
+					AND a.user_id = #{realName.userId}
+				</if>
+				<if test="realName.realName != null and realName.realName != ''">
+					AND a.real_name = #{realName.realName}
+				</if>
+				<if test="realName.idCard != null and realName.idCard != ''">
+					AND a.id_card = #{realName.idCard}
+				</if>
+				<if test="realName.faceImg != null and realName.faceImg != ''">
+					AND a.face_img = #{realName.faceImg}
+				</if>
+				<if test="realName.backImg != null and realName.backImg != ''">
+					AND a.back_img = #{realName.backImg}
+				</if>
+				<if test="realName.status != null">
+					AND a.status = #{realName.status}
+				</if>
+				<if test="realName.reviewRemark != null and realName.reviewRemark != ''">
+					AND a.review_remark = #{realName.reviewRemark}
+				</if>
+				<if test="realName.type != null">
+					AND a.type = #{realName.type}
+				</if>
+				<if test="realName.remark != null and realName.remark != ''">
+					AND a.remark = #{realName.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+				<if test="mobile != null and mobile != '' ">
+					AND a.user_id in (select id from user where mobile = #{mobile})
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="RealNameVo">
+   		SELECT
+			<include refid="realNameColumns"/>
+		FROM real_name a
+		<include refid="realNameConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM real_name a
+		<include refid="realNameConditions"/>
+   </select>
+   
+   
+    <select id="query" resultType="RealNameVo">
+   		SELECT
+			<include refid="realNameColumns"/>
+		FROM real_name a
+		<include refid="realNameConditions"/>
+   </select>
+   
+   <update id="updateStatus">
+		UPDATE real_name SET 	
+			status = #{status},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+   
+</mapper>

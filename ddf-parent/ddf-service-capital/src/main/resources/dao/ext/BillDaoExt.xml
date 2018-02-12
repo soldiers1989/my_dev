@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.BillDao">
+    <sql id="billConditions">
+    	<where>
+			
+			<if test=" bill!= null ">
+				<if test="bill.id != null and bill.id != ''">
+					AND a.id = #{bill.id}
+				</if>
+				<if test="bill.userId != null and bill.userId != ''">
+					AND a.user_id = #{bill.userId}
+				</if>
+				<if test="bill.orderType != null">
+					AND a.order_type = #{bill.orderType}
+				</if>
+				<if test="bill.orderId != null and bill.orderId != ''">
+					AND a.order_id = #{bill.orderId}
+				</if>
+				<if test="bill.orderNo != null and bill.orderNo != ''">
+					AND a.order_no = #{bill.orderNo}
+				</if>
+				<if test="bill.amount != null and bill.amount != ''">
+					AND a.amount = #{bill.amount}
+				</if>
+				<if test="bill.status != null">
+					AND a.status = #{bill.status}
+				</if>
+				<if test="bill.remark != null and bill.remark != ''">
+					AND a.remark = #{bill.remark}
+				</if>
+				<if test="bill.createDate != null and bill.createDate != ''">
+					AND a.create_date = #{bill.createDate}
+				</if>
+				<if test="bill.updateDate != null and bill.updateDate != ''">
+					AND a.update_date = #{bill.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="BillVo">
+   		SELECT
+			<include refid="billColumns"/>
+		FROM bill a
+		<include refid="billConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM bill a
+		<include refid="billConditions"/>
+   </select>
+</mapper>

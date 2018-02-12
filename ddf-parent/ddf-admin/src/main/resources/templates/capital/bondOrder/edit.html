@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${bondOrder.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">用户id：</label>
+								<div class="col-sm-8">
+									<input id="landlordId" name="landlordId" th:value="${bondOrder.landlordId}" class="form-control" type="text" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">金额：</label>
+								<div class="col-sm-8">
+									<input id="amount" name="amount" th:value="${bondOrder.amount}" class="form-control" type="text" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">状态：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" th:value="${bondOrder.status.explain}" class="form-control" type="text" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">付款时间：</label>
+								<div class="col-sm-8">
+									<input id="createDate" name="createDate" th:value="${bondOrder.createDate}==null?null:${#dates.format(bondOrder.createDate,'yyyy-MM-dd HH:mm:ss')}" class="form-control" type="text" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<textarea rows="5" cols="10" class="form-control" id="remark" name="remark"></textarea>
+								</div>
+							</div>
+							<div class="form-group" th:unless="${bondOrder.status.name() eq 'breach'}">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">违约没收</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/capital/bondOrder/edit.js">
+	</script>
+</body>
+</html>

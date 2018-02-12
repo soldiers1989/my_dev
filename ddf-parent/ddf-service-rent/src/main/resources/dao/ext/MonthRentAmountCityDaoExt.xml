@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountCityDao">
+    <sql id="monthRentAmountCityConditions">
+    	<where>
+			
+			<if test=" monthRentAmountCity!= null ">
+				<if test="monthRentAmountCity.id != null and monthRentAmountCity.id != ''">
+					AND a.id = #{monthRentAmountCity.id}
+				</if>
+				<if test="monthRentAmountCity.cityId != null and monthRentAmountCity.cityId != ''">
+					AND a.city_id = #{monthRentAmountCity.cityId}
+				</if>
+				<if test="monthRentAmountCity.date != null and monthRentAmountCity.date != ''">
+					AND a.date = #{monthRentAmountCity.date}
+				</if>
+				<if test="monthRentAmountCity.bdate != null and monthRentAmountCity.bdate != ''">
+					AND a.bdate = #{monthRentAmountCity.bdate}
+				</if>
+				<if test="monthRentAmountCity.edate != null and monthRentAmountCity.edate != ''">
+					AND a.edate = #{monthRentAmountCity.edate}
+				</if>
+				<if test="monthRentAmountCity.status != null">
+					AND a.status = #{monthRentAmountCity.status}
+				</if>
+				<if test="monthRentAmountCity.statsDate != null and monthRentAmountCity.statsDate != ''">
+					AND a.stats_date = #{monthRentAmountCity.statsDate}
+				</if>
+				<if test="monthRentAmountCity.oneRoomAmount != null and monthRentAmountCity.oneRoomAmount != ''">
+					AND a.one_room_amount = #{monthRentAmountCity.oneRoomAmount}
+				</if>
+				<if test="monthRentAmountCity.twoRoomAmount != null and monthRentAmountCity.twoRoomAmount != ''">
+					AND a.two_room_amount = #{monthRentAmountCity.twoRoomAmount}
+				</if>
+				<if test="monthRentAmountCity.threeRoomAmount != null and monthRentAmountCity.threeRoomAmount != ''">
+					AND a.three_room_amount = #{monthRentAmountCity.threeRoomAmount}
+				</if>
+				<if test="monthRentAmountCity.calOneRoomAmount != null and monthRentAmountCity.calOneRoomAmount != ''">
+					AND a.cal_one_room_amount = #{monthRentAmountCity.calOneRoomAmount}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MonthRentAmountCityVo">
+   		SELECT
+			<include refid="monthRentAmountCityColumns"/>
+		FROM month_rent_amount_city a
+		<include refid="monthRentAmountCityConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM month_rent_amount_city a
+		<include refid="monthRentAmountCityConditions"/>
+   </select>
+	<select id="findListByDateAndStatus" resultType="MonthRentAmountCityVo">
+		SELECT
+			<include refid="monthRentAmountCityColumns"/>
+		FROM
+		month_rent_amount_city a
+		WHERE
+		edate <![CDATA[<]]> NOW()
+		AND `status` = 'WAIT'
+	</select>
+	<update id="statsModify">
+		UPDATE month_rent_amount_city SET
+		status = #{status},
+		stats_date = #{statsDate},
+		one_room_amount = #{oneRoomAmount},
+		two_room_amount = #{twoRoomAmount},
+		three_room_amount = #{threeRoomAmount},
+		cal_one_room_amount = #{calOneRoomAmount}
+		WHERE id = #{id}
+	</update>
+	<update id="removeByDate">
+		DELETE FROM month_rent_amount_city
+		WHERE date = #{date}
+	</update>
+</mapper>

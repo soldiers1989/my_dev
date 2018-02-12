@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ApartmentDepositContractDao">
+    <sql id="apartmentDepositContractConditions">
+    	<where>
+			
+			<if test=" apartmentDepositContract!= null ">
+				<if test="apartmentDepositContract.id != null and apartmentDepositContract.id != ''">
+					AND a.id = #{apartmentDepositContract.id}
+				</if>
+				<if test="apartmentDepositContract.rentAmount != null">
+					AND a.rent_amount = #{apartmentDepositContract.rentAmount}
+				</if>
+				<if test="apartmentDepositContract.depositAmout != null">
+					AND a.deposit_amout = #{apartmentDepositContract.depositAmout}
+				</if>
+				<if test="apartmentDepositContract.status != null">
+					AND a.status = #{apartmentDepositContract.status}
+				</if>
+				<if test="apartmentDepositContract.apartmentId != null and apartmentDepositContract.apartmentId != ''">
+					AND a.apartment_id = #{apartmentDepositContract.apartmentId}
+				</if>
+				<if test="apartmentDepositContract.apartmentType != null">
+					AND a.apartment_type = #{apartmentDepositContract.apartmentType}
+				</if>
+				<if test="apartmentDepositContract.rentType != null">
+					AND a.rent_type = #{apartmentDepositContract.rentType}
+				</if>
+				<if test="apartmentDepositContract.payType != null">
+					AND a.pay_type = #{apartmentDepositContract.payType}
+				</if>
+				<if test="apartmentDepositContract.checkInDate != null">
+					AND a.check_in_date = #{apartmentDepositContract.checkInDate}
+				</if>
+				<if test="apartmentDepositContract.checkOutDate != null">
+					AND a.check_out_date = #{apartmentDepositContract.checkOutDate}
+				</if>
+				<if test="apartmentDepositContract.remark != null and apartmentDepositContract.remark != ''">
+					AND a.remark = #{apartmentDepositContract.remark}
+				</if>
+				<if test="apartmentDepositContract.createDate != null">
+					AND a.create_date = #{apartmentDepositContract.createDate}
+				</if>
+				<if test="apartmentDepositContract.updateDate != null">
+					AND a.update_date = #{apartmentDepositContract.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="ApartmentDepositContractVo">
+   		SELECT
+			<include refid="apartmentDepositContractColumns"/>
+		FROM apartment_deposit_contract a
+		<include refid="apartmentDepositContractConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM apartment_deposit_contract a
+		<include refid="apartmentDepositContractConditions"/>
+   </select>
+</mapper>

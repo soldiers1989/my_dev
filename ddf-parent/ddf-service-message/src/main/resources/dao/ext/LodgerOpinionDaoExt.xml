@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.LodgerOpinionDao">
+    <sql id="lodgerOpinionConditions">
+    	<where>
+			
+			<if test=" lodgerOpinion!= null ">
+				<if test="lodgerOpinion.id != null and lodgerOpinion.id != ''">
+					AND a.id = #{lodgerOpinion.id}
+				</if>
+				<if test="lodgerOpinion.lodgerId != null and lodgerOpinion.lodgerId != ''">
+					AND a.lodger_id = #{lodgerOpinion.lodgerId}
+				</if>
+				<if test="lodgerOpinion.landlordId != null and lodgerOpinion.landlordId != ''">
+					AND a.landlord_id = #{lodgerOpinion.landlordId}
+				</if>
+				<if test="lodgerOpinion.lodgerLevel != null and lodgerOpinion.lodgerLevel != ''">
+					AND a.lodger_level = #{lodgerOpinion.lodgerLevel}
+				</if>
+				<if test="lodgerOpinion.lodgerRemark != null and lodgerOpinion.lodgerRemark != ''">
+					AND a.lodger_remark = #{lodgerOpinion.lodgerRemark}
+				</if>
+				<if test="lodgerOpinion.lodgerImg != null and lodgerOpinion.lodgerImg != ''">
+					AND a.lodger_img = #{lodgerOpinion.lodgerImg}
+				</if>
+				<if test="lodgerOpinion.lodgerLabel != null and lodgerOpinion.lodgerLabel != ''">
+					AND a.lodger_label = #{lodgerOpinion.lodgerLabel}
+				</if>
+				<if test="lodgerOpinion.remark != null and lodgerOpinion.remark != ''">
+					AND a.remark = #{lodgerOpinion.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="LodgerOpinionVo">
+   		SELECT
+			<include refid="lodgerOpinionColumns"/>
+		FROM lodger_opinion a
+		<include refid="lodgerOpinionConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM lodger_opinion a
+		<include refid="lodgerOpinionConditions"/>
+   </select>
+</mapper>

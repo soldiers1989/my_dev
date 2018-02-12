@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.student.dao.UserDao">
+    
+	<sql id="userColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.sex AS "sex",
+		a.pwd AS "pwd",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="User">
+		SELECT 
+			<include refid="userColumns"/>
+		FROM user a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO user(
+			id,
+			name,
+			sex,
+			pwd,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{name},
+			#{sex},
+			#{pwd},
+			now(),
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE user SET 	
+			name = #{name},
+			sex = #{sex},
+			pwd = #{pwd},
+			update_date = now()
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM user
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

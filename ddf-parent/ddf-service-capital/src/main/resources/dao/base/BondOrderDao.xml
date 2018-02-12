@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.BondOrderDao">
+    
+	<sql id="bondOrderColumns">
+		a.id AS "id",
+		a.landlord_id AS "landlordId",
+		a.no AS "no",
+		a.amount AS "amount",
+		a.alipay_trade_no AS "alipayTradeNo",
+		a.status AS "status",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="BondOrder">
+		SELECT 
+			<include refid="bondOrderColumns"/>
+		FROM bond_order a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO bond_order(
+			id,
+			landlord_id,
+			no,
+			amount,
+			alipay_trade_no,
+			status,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{landlordId},
+			#{no},
+			#{amount},
+			#{alipayTradeNo},
+			#{status},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE bond_order SET 	
+			id = #{id},
+			landlord_id = #{landlordId},
+			no = #{no},
+			amount = #{amount},
+			alipay_trade_no = #{alipayTradeNo},
+			status = #{status},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM bond_order
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

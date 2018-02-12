@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountTaskDao">
+    <sql id="monthRentAmountTaskConditions">
+        <where>
+
+            <if test=" monthRentAmountTask!= null ">
+                <if test="monthRentAmountTask.id != null and monthRentAmountTask.id != ''">
+                    AND a.id = #{monthRentAmountTask.id}
+                </if>
+                <if test="monthRentAmountTask.date != null">
+                    AND a.date = #{monthRentAmountTask.date}
+                </if>
+                <if test="monthRentAmountTask.bdate != null">
+                    AND a.bdate = #{monthRentAmountTask.bdate}
+                </if>
+                <if test="monthRentAmountTask.edate != null">
+                    AND a.edate = #{monthRentAmountTask.edate}
+                </if>
+                <if test="monthRentAmountTask.status != null">
+                    AND a.status = #{monthRentAmountTask.status}
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="findList" resultType="MonthRentAmountTaskVo">
+        SELECT
+        <include refid="monthRentAmountTaskColumns"/>
+        FROM month_rent_amount_task a
+        <include refid="monthRentAmountTaskConditions"/>
+        <if test="sortSql != null and sortSql != ''">
+            ${sortSql}
+        </if>
+        <if test="pageSql != null and pageSql != ''">
+            ${pageSql}
+        </if>
+
+    </select>
+    <select id="findCount" resultType="java.lang.Long">
+        SELECT
+        COUNT(1)
+        FROM month_rent_amount_task a
+        <include refid="monthRentAmountTaskConditions"/>
+    </select>
+    <select id="findListByDateAndStatus" resultType="MonthRentAmountTaskVo">
+		SELECT
+		*
+		FROM
+		month_rent_amount_task
+		WHERE
+		edate <![CDATA[<]]> NOW()
+		AND `status` = 'WAIT'
+	</select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.dic.dao.MetroStationDao">
+    <sql id="metroStationConditions">
+    	<where>
+			
+			<if test=" metroStation!= null ">
+				<if test="metroStation.id != null and metroStation.id != ''">
+					AND a.id = #{metroStation.id}
+				</if>
+				<if test="metroStation.name != null and metroStation.name != ''">
+					AND a.name = #{metroStation.name}
+				</if>
+				<if test="metroStation.metroLineId != null and metroStation.metroLineId != ''">
+					AND a.metro_line_id = #{metroStation.metroLineId}
+				</if>
+				<if test="metroStation.sort != null and metroStation.sort != ''">
+					AND a.sort = #{metroStation.sort}
+				</if>
+				<if test="metroStation.remark != null and metroStation.remark != ''">
+					AND a.remark = #{metroStation.remark}
+				</if>
+				<if test="metroStation.createDate != null and metroStation.createDate != ''">
+					AND a.create_date = #{metroStation.createDate}
+				</if>
+				<if test="metroStation.updateDate != null and metroStation.updateDate != ''">
+					AND a.update_date = #{metroStation.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="MetroStationVo">
+   		SELECT
+			<include refid="metroStationColumns"/>
+		FROM metro_station a
+		<include refid="metroStationConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM metro_station a
+		<include refid="metroStationConditions"/>
+   </select>
+</mapper>

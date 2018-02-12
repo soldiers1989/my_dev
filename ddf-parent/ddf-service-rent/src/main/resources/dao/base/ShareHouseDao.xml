@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.ShareHouseDao">
+    
+	<sql id="shareHouseColumns">
+		a.id AS "id",
+		a.user_id AS "userId",
+		a.assistant_id AS "assistantId",
+		a.lodger_info AS "lodgerInfo",
+		a.own_type AS "ownType",
+		a.province_id AS "provinceId",
+		a.city_id AS "cityId",
+		a.district_id AS "districtId",
+		a.circle_id AS "circleId",
+		a.xiaoqu_name AS "xiaoquName",
+		a.xiaoqu_id AS "xiaoquId",
+		a.xiaoqu_address AS "xiaoquAddress",
+		a.cover_img AS "coverImg",
+		a.detail_imgs AS "detailImgs",
+		a.loudonghao AS "loudonghao",
+		a.danyuanhao AS "danyuanhao",
+		a.shihao AS "shihao",
+		a.total_floor AS "totalFloor",
+		a.current_floor AS "currentFloor",
+		a.apartment_num AS "apartmentNum",
+		a.public_facilitys AS "publicFacilitys",
+		a.status AS "status",
+		a.review_success_date AS "reviewSuccessDate",
+		a.hide_flag AS "hideFlag",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="ShareHouse">
+		SELECT 
+			<include refid="shareHouseColumns"/>
+		FROM share_house a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO share_house(
+			id,
+			user_id,
+			assistant_id,
+			lodger_info,
+			own_type,
+			province_id,
+			city_id,
+			district_id,
+			circle_id,
+			xiaoqu_name,
+			xiaoqu_id,
+			xiaoqu_address,
+			cover_img,
+			detail_imgs,
+			loudonghao,
+			danyuanhao,
+			shihao,
+			total_floor,
+			current_floor,
+			apartment_num,
+			public_facilitys,
+			status,
+			review_success_date,
+			hide_flag,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{userId},
+			#{assistantId},
+			#{lodgerInfo},
+			#{ownType},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{circleId},
+			#{xiaoquName},
+			#{xiaoquId},
+			#{xiaoquAddress},
+			#{coverImg},
+			#{detailImgs},
+			#{loudonghao},
+			#{danyuanhao},
+			#{shihao},
+			#{totalFloor},
+			#{currentFloor},
+			#{apartmentNum},
+			#{publicFacilitys},
+			#{status},
+			#{reviewSuccessDate},
+			#{hideFlag},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE share_house SET 	
+			id = #{id},
+			user_id = #{userId},
+			assistant_id = #{assistantId},
+			lodger_info = #{lodgerInfo},
+			own_type = #{ownType},
+			province_id = #{provinceId},
+			city_id = #{cityId},
+			district_id = #{districtId},
+			circle_id = #{circleId},
+			xiaoqu_name = #{xiaoquName},
+			xiaoqu_id = #{xiaoquId},
+			xiaoqu_address = #{xiaoquAddress},
+			cover_img = #{coverImg},
+			detail_imgs = #{detailImgs},
+			loudonghao = #{loudonghao},
+			danyuanhao = #{danyuanhao},
+			shihao = #{shihao},
+			total_floor = #{totalFloor},
+			current_floor = #{currentFloor},
+			apartment_num = #{apartmentNum},
+			public_facilitys = #{publicFacilitys},
+			status = #{status},
+			review_success_date = #{reviewSuccessDate},
+			hide_flag = #{hideFlag},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM share_house
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

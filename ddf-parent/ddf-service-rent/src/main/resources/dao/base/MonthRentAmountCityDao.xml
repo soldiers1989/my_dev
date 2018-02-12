@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.MonthRentAmountCityDao">
+    
+	<sql id="monthRentAmountCityColumns">
+		a.id AS "id",
+		a.city_id AS "cityId",
+		a.date AS "date",
+		a.stats_date AS "statsDate",
+		a.one_room_amount AS "oneRoomAmount",
+		a.two_room_amount AS "twoRoomAmount",
+		a.three_room_amount AS "threeRoomAmount",
+		a.cal_one_room_amount AS "calOneRoomAmount",
+		a.bdate AS "bdate",
+		a.edate AS "edate",
+		a.status AS "status"
+	</sql>
+    
+	<select id="query4id" resultType="MonthRentAmountCity">
+		SELECT 
+			<include refid="monthRentAmountCityColumns"/>
+		FROM month_rent_amount_city a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO month_rent_amount_city(
+			id,
+			city_id,
+			date,
+			stats_date,
+			one_room_amount,
+			two_room_amount,
+			three_room_amount,
+			cal_one_room_amount,
+			bdate,
+			edate,
+			status
+		) VALUES (
+			#{id},
+			#{cityId},
+			#{date},
+			#{statsDate},
+			#{oneRoomAmount},
+			#{twoRoomAmount},
+			#{threeRoomAmount},
+			#{calOneRoomAmount},
+			#{bdate},
+			#{edate},
+			#{status}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE month_rent_amount_city SET 	
+			id = #{id},
+			city_id = #{cityId},
+			date = #{date},
+			stats_date = #{statsDate},
+			one_room_amount = #{oneRoomAmount},
+			two_room_amount = #{twoRoomAmount},
+			three_room_amount = #{threeRoomAmount},
+			cal_one_room_amount = #{calOneRoomAmount},
+			bdate = #{bdate},
+			edate = #{edate},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM month_rent_amount_city
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

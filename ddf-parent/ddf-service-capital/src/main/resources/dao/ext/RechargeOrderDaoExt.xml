@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.RechargeOrderDao">
+    <sql id="rechargeOrderConditions">
+    	<where>
+			
+			<if test=" rechargeOrder!= null ">
+				<if test="rechargeOrder.id != null and rechargeOrder.id != ''">
+					AND a.id = #{rechargeOrder.id}
+				</if>
+				<if test="rechargeOrder.userId != null and rechargeOrder.userId != ''">
+					AND a.user_id = #{rechargeOrder.userId}
+				</if>
+				<if test="rechargeOrder.amount != null and rechargeOrder.amount != ''">
+					AND a.amount = #{rechargeOrder.amount}
+				</if>
+				<if test="rechargeOrder.status != null">
+					AND a.status = #{rechargeOrder.status}
+				</if>
+				<if test="rechargeOrder.alipayTradeNo != null and rechargeOrder.alipayTradeNo != ''">
+					AND a.alipay_trade_no = #{rechargeOrder.alipayTradeNo}
+				</if>
+				<if test="rechargeOrder.createDate != null and rechargeOrder.createDate != ''">
+					AND a.create_date = #{rechargeOrder.createDate}
+				</if>
+				<if test="rechargeOrder.updateDate != null and rechargeOrder.updateDate != ''">
+					AND a.update_date = #{rechargeOrder.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="RechargeOrderVo">
+   		SELECT
+			<include refid="rechargeOrderColumns"/>
+		FROM recharge_order a
+		<include refid="rechargeOrderConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM recharge_order a
+		<include refid="rechargeOrderConditions"/>
+   </select>
+</mapper>

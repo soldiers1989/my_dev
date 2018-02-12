@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.capital.dao.WithdrawOrderDao">
+    <sql id="withdrawOrderConditions">
+    	<where>
+			
+			<if test=" withdrawOrder!= null ">
+				<if test="withdrawOrder.id != null and withdrawOrder.id != ''">
+					AND a.id = #{withdrawOrder.id}
+				</if>
+				<if test="withdrawOrder.userId != null and withdrawOrder.userId != ''">
+					AND a.user_id = #{withdrawOrder.userId}
+				</if>
+				<if test="withdrawOrder.alipayAccount != null and withdrawOrder.alipayAccount != ''">
+					AND a.alipay_account = #{withdrawOrder.alipayAccount}
+				</if>
+				<if test="withdrawOrder.amount != null and withdrawOrder.amount != ''">
+					AND a.amount = #{withdrawOrder.amount}
+				</if>
+				<if test="withdrawOrder.userFee != null and withdrawOrder.userFee != ''">
+					AND a.user_fee = #{withdrawOrder.userFee}
+				</if>
+				<if test="withdrawOrder.status != null">
+					AND a.status = #{withdrawOrder.status}
+				</if>
+				<if test="withdrawOrder.applyId != null and withdrawOrder.applyId != ''">
+					AND a.apply_id = #{withdrawOrder.applyId}
+				</if>
+				<if test="withdrawOrder.createDate != null and withdrawOrder.createDate != ''">
+					AND a.create_date = #{withdrawOrder.createDate}
+				</if>
+				<if test="withdrawOrder.updateDate != null and withdrawOrder.updateDate != ''">
+					AND a.update_date = #{withdrawOrder.updateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="WithdrawOrderVo">
+   		SELECT
+			<include refid="withdrawOrderColumns"/>
+		FROM withdraw_order a
+		<include refid="withdrawOrderConditions"/>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM withdraw_order a
+		<include refid="withdrawOrderConditions"/>
+   </select>
+   
+   <select id="queryList4batchId4status" resultType="WithdrawOrderVo">
+		SELECT 
+			<include refid="withdrawOrderColumns"/>
+		FROM withdraw_order a,withdraw_apply b
+		WHERE a.apply_id = b.id AND b.batch_id = #{batchId} AND a.status = #{status}
+	</select>
+	
+	<update id="updateStatus4applyId4PROCESSING">
+		UPDATE erp_account.withdraw_order SET 	
+			status = #{status},
+			update_date = #{updateDate}
+		WHERE apply_id = #{applyId} AND status = 'PROCESSING'
+	</update>
+   
+</mapper>

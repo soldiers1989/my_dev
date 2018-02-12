@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.rent.dao.SpiderHouseDao">
+    
+	<sql id="spiderHouseColumns">
+		a.id AS "id",
+		a.resouce_url AS "resouceUrl",
+		a.province_id AS "provinceId",
+		a.city_id AS "cityId",
+		a.district_id AS "districtId",
+		a.circle_id AS "circleId",
+		a.xiaoqu_id AS "xiaoquId",
+		a.room AS "room",
+		a.amount AS "amount",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="SpiderHouse">
+		SELECT 
+			<include refid="spiderHouseColumns"/>
+		FROM spider_house a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO spider_house(
+			id,
+			resouce_url,
+			province_id,
+			city_id,
+			district_id,
+			circle_id,
+			xiaoqu_id,
+			room,
+			amount,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{resouceUrl},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{circleId},
+			#{xiaoquId},
+			#{room},
+			#{amount},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE spider_house SET 	
+			id = #{id},
+			resouce_url = #{resouceUrl},
+			province_id = #{provinceId},
+			city_id = #{cityId},
+			district_id = #{districtId},
+			circle_id = #{circleId},
+			xiaoqu_id = #{xiaoquId},
+			room = #{room},
+			amount = #{amount},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM spider_house
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

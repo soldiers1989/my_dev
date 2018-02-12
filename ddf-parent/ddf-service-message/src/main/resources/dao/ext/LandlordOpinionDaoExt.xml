@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.LandlordOpinionDao">
+    <sql id="landlordOpinionConditions">
+    	<where>
+			
+			<if test=" landlordOpinion!= null ">
+				<if test="landlordOpinion.id != null and landlordOpinion.id != ''">
+					AND a.id = #{landlordOpinion.id}
+				</if>
+				<if test="landlordOpinion.lodgerId != null and landlordOpinion.lodgerId != ''">
+					AND a.lodger_id = #{landlordOpinion.lodgerId}
+				</if>
+				<if test="landlordOpinion.landlordId != null and landlordOpinion.landlordId != ''">
+					AND a.landlord_id = #{landlordOpinion.landlordId}
+				</if>
+				<if test="landlordOpinion.careLevel != null and landlordOpinion.careLevel != ''">
+					AND a.care_level = #{landlordOpinion.careLevel}
+				</if>
+				<if test="landlordOpinion.careRemark != null and landlordOpinion.careRemark != ''">
+					AND a.care_remark = #{landlordOpinion.careRemark}
+				</if>
+				<if test="landlordOpinion.careImg != null and landlordOpinion.careImg != ''">
+					AND a.care_img = #{landlordOpinion.careImg}
+				</if>
+				<if test="landlordOpinion.careLabel != null and landlordOpinion.careLabel != ''">
+					AND a.care_label = #{landlordOpinion.careLabel}
+				</if>
+				<if test="landlordOpinion.remark != null and landlordOpinion.remark != ''">
+					AND a.remark = #{landlordOpinion.remark}
+				</if>
+				<if test="startCreateDate != null">
+					AND a.create_date &gt; #{startCreateDate}
+				</if>
+				<if test="endCreateDate != null">
+					AND a.create_date &lt; #{endCreateDate}
+				</if>
+			</if>
+		</where>
+    </sql>
+   <select id="findList" resultType="LandlordOpinionVo">
+   		SELECT
+			<include refid="landlordOpinionColumns"/>
+		FROM landlord_opinion a
+		<include refid="landlordOpinionConditions"/>
+		<if test="sortSql != null and sortSql != ''">
+			${sortSql}
+		</if>
+		<if test="pageSql != null and pageSql != ''">
+			${pageSql}
+		</if>
+
+   </select>
+    <select id="findCount" resultType="java.lang.Long">
+   		SELECT
+			COUNT(1)
+		FROM landlord_opinion a
+		<include refid="landlordOpinionConditions"/>
+   </select>
+</mapper>

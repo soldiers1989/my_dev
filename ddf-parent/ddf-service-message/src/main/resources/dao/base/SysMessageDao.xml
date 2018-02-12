@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.SysMessageDao">
+    
+	<sql id="sysMessageColumns">
+		a.id AS "id",
+		a.sys_message_admin_id AS "sysMessageAdminId",
+		a.user_id AS "userId",
+		a.type AS "type",
+		a.img AS "img",
+		a.title AS "title",
+		a.content AS "content",
+		a.url AS "url",
+		a.read_status AS "readStatus",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="SysMessage">
+		SELECT 
+			<include refid="sysMessageColumns"/>
+		FROM sys_message a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO sys_message(
+			id,
+			sys_message_admin_id,
+			user_id,
+			type,
+			img,
+			title,
+			content,
+			url,
+			read_status,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{sysMessageAdminId},
+			#{userId},
+			#{type},
+			#{img},
+			#{title},
+			#{content},
+			#{url},
+			#{readStatus},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE sys_message SET 	
+			id = #{id},
+			sys_message_admin_id = #{sysMessageAdminId},
+			user_id = #{userId},
+			type = #{type},
+			img = #{img},
+			title = #{title},
+			content = #{content},
+			url = #{url},
+			read_status = #{readStatus},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM sys_message
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

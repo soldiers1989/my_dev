@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.message.dao.LodgerComplainDao">
+    
+	<sql id="lodgerComplainColumns">
+		a.id AS "id",
+		a.lodger_id AS "lodgerId",
+		a.landlord_id AS "landlordId",
+		a.type AS "type",
+		a.img AS "img",
+		a.remark AS "remark",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate"
+	</sql>
+    
+	<select id="query4id" resultType="LodgerComplain">
+		SELECT 
+			<include refid="lodgerComplainColumns"/>
+		FROM lodger_complain a
+		WHERE a.id = #{id}
+	</select>
+
+	<insert id="create">
+		INSERT INTO lodger_complain(
+			id,
+			lodger_id,
+			landlord_id,
+			type,
+			img,
+			remark,
+			create_date,
+			update_date
+		) VALUES (
+			#{id},
+			#{lodgerId},
+			#{landlordId},
+			#{type},
+			#{img},
+			#{remark},
+			#{createDate},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="modify">
+		UPDATE lodger_complain SET 	
+			id = #{id},
+			lodger_id = #{lodgerId},
+			landlord_id = #{landlordId},
+			type = #{type},
+			img = #{img},
+			remark = #{remark},
+			create_date = #{createDate},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="remove">
+		DELETE FROM lodger_complain
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
